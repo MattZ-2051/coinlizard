@@ -1,0 +1,22 @@
+{
+  "name": "coinlizard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattZ-2051/coinlizard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MattZ-2051/coinlizard/issues"
+  },
+  "homepage": "https://github.com/MattZ-2051/coinlizard#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
