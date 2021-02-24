@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CoinGecko from "coingecko-api";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Crypto from "./components/Crypto";
+import Coin from "./components/Coin";
 
 const coinGeckoClient = new CoinGecko();
 
@@ -40,7 +40,7 @@ function App() {
         <tbody>
           {data ? (
             data.map((coin) => {
-              return <Crypto coin={coin} key={coin.id} />;
+              return <Coin coin={coin} key={coin.id} />;
             })
           ) : (
             <h1>Loading...</h1>
