@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CoinGecko from "coingecko-api";
+import { useHistory } from "react-router-dom";
 
 const coinGeckoClient = new CoinGecko();
 
@@ -14,10 +15,13 @@ export default function Crypto({ coin }) {
       maximumSignificantDigits,
     }).format(number);
 
+  const history = useHistory();
+
   // Funtion that handles a click on a currency and will direct user to currency page
   const handleClick = async (e) => {
     const result = await coinGeckoClient.coins.fetch(coin.id, {});
     console.log(result.data);
+    history.push(`/coin-profile/${result.data.id}`);
   };
 
   return (
