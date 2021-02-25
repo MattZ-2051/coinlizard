@@ -26,13 +26,18 @@ passport.use(
         (accessToken, refreshToken, profile, done) => {
             // console.log(accessToken);
             // console.log(refreshToken);
-            // console.log(profile);
+            
+            const name = profile.name.givenName + ' ' + profile.name.familyName
+            console.log(name);
             User.findOne({ googleId: profile.id }) // queries db for googleId matching profile.id
                 .then((existingUser) => {
                     if (existingUser) { // means user alreadt exists, do not create a new one
                         done(null, existingUser);
                     } else { // creates a new user with the profile id
-                        new User({ googleId: profile.id })
+                        new User({ 
+                                   googleId: profile.id, 
+                                   name: name
+                                })
                             .save() //.save() saves data to the database
                             .then(user => done(null, user));
                     }
