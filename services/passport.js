@@ -28,7 +28,7 @@ passport.use(
             // console.log(refreshToken);
             
             const name = profile.name.givenName + ' ' + profile.name.familyName
-            console.log(name);
+            console.log(profile);
             User.findOne({ googleId: profile.id }) // queries db for googleId matching profile.id
                 .then((existingUser) => {
                     if (existingUser) { // means user alreadt exists, do not create a new one
