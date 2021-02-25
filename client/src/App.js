@@ -4,19 +4,20 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Coin from "./components/Coin";
 
+// instance of CoinGecko client to use for api calls
 const coinGeckoClient = new CoinGecko();
 
 function App() {
-  const [data, setData] = useState([]);
+  const [coinData, setCoinData] = useState([]);
 
   useEffect(() => {
+    // function making calls to Coin Gecko API, results are ordered by market cap
     async function fetchData() {
       const params = {
         order: CoinGecko.ORDER.MARKET_CAP_DESC,
-        per_page: 10,
       };
       const result = await coinGeckoClient.coins.markets({ params });
-      setData(result.data);
+      setCoinData(result.data);
     }
 
     fetchData();
@@ -38,8 +39,8 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {data ? (
-            data.map((coin) => {
+          {coinData ? (
+            coinData.map((coin) => {
               return <Coin coin={coin} key={coin.id} />;
             })
           ) : (

@@ -4,10 +4,9 @@ import CoinGecko from "coingecko-api";
 const coinGeckoClient = new CoinGecko();
 
 export default function Crypto({ coin }) {
-  const id = coin.id;
-
+  // Helper function to turn number into percent
   const formatPercent = (number) => `${new Number(number).toFixed(2)}%`;
-
+  // Helper funtion to turn number in to USD with sig fig
   const formatDollar = (number, maximumSignificantDigits) =>
     new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -15,14 +14,14 @@ export default function Crypto({ coin }) {
       maximumSignificantDigits,
     }).format(number);
 
-  useEffect(() => {
-    async function fetchData() {}
-
-    fetchData();
-  }, []);
+  // Funtion that handles a click on a currency and will direct user to currency page
+  const handleClick = async (e) => {
+    const result = await coinGeckoClient.coins.fetch(coin.id, {});
+    console.log(result.data);
+  };
 
   return (
-    <tr key={coin.id}>
+    <tr key={coin.id} onClick={handleClick}>
       <td>
         <img
           src={coin.image}
