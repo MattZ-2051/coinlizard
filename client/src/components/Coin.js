@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CoinGecko from "coingecko-api";
 import { useHistory } from "react-router-dom";
 

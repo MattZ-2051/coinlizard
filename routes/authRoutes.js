@@ -8,14 +8,24 @@ module.exports = (app) => {
         scope: ['profile', 'email'] //these strings are not made up - google has a list of strings
     }));
 
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    app.get('/auth/google/callback', passport.authenticate('google'),
+    (req, res) => {
+        res.redirect('/')
+    });
 
     app.get('/api/logout', (req, res) => { // this will logout user
         req.logout();
-        res.send({ logged: 'out' }); // confirm the user has been logged out
+        
+        res.redirect('/')
     });
 
     app.get('/api/current_user', (req, res) => { // this will return current user
         res.send(req.user);
     });
+
+    app.get('/api/test', (req, res) => {
+        res.send({
+            hello: 'Hello'
+        });
+    }); 
 }
