@@ -23,6 +23,7 @@ export default function Crypto({ coin }) {
     const result = await coinGeckoClient.coins.fetch(coin.id, {});
     setSingleCoinData(result.data);
     history.push(`/coin-profile/${result.data.id}`);
+    console.log(result.data);
   };
 
   return (
