@@ -10,21 +10,27 @@ export default function CoinProfile() {
 
   useEffect(() => {
     dispatch(fetchData(params.coinId));
-  }, [dispatch]);
+  }, [params]);
 
+  if (Object.keys(data).length === 0) return null;
   console.log("data", data);
-  if (data === undefined || {}) return null;
   return (
     <>
       <div>
+        <a href="/">Home Page</a>
         <img src={data.image.large} alt="" />
-        <h1>{data.id}</h1>
+        <h1>
+          {data.id}({data.symbol})
+        </h1>
         <p>Symbol: {data.symbol}</p>
         <p>Market Cap Rank: {data.market_cap_rank}</p>
         <p>Date Created: {data.genesis_date}</p>
         <p>Developer Score: {data.developer_score}</p>
         <p>Community Score: {data.developer_score}</p>
         <p>Liquidity Score: {data.liquidity_score}</p>
+        <p>Total Supply: {data.total_supply}</p>
+        <p>Max Supply: {data.max_supply}</p>
+        <p>Circulating Supply: {data.circulating_supply}</p>
         {data.description && <p>{data.description.en}</p>}
       </div>
     </>
