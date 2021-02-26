@@ -6,11 +6,13 @@ import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import CoinProfile from "./components/CoinProfile";
 import Header from './components/Header.js';
+import UserProfile from './components/UserProfile.js';
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
+      <Route exact path='/accounts/:id' component={UserProfile} />
       <Route exact path="/" component={Home} />
       <Route exact path="/coin-profile/:coinId" component={CoinProfile} />
     </BrowserRouter>
