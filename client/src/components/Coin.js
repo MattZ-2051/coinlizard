@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import CoinGecko from "coingecko-api";
+import React from "react";
 import { useHistory } from "react-router-dom";
-
-const coinGeckoClient = new CoinGecko();
 
 export default function Crypto({ coin }) {
   // Helper function to turn number into percent
@@ -16,14 +13,10 @@ export default function Crypto({ coin }) {
     }).format(number);
 
   const history = useHistory();
-  const [singleCoinData, setSingleCoinData] = useState(null);
 
   // Funtion that handles a click on a currency and will direct user to currency page
-  const handleClick = async (e) => {
-    const result = await coinGeckoClient.coins.fetch(coin.id, {});
-    setSingleCoinData(result.data);
-    history.push(`/coin-profile/${result.data.id}`);
-    console.log(result.data);
+  const handleClick = async () => {
+    history.push(`/coin-profile/${coin.id}`);
   };
 
   return (
