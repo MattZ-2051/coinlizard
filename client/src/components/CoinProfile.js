@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData } from "../actions/coinActions";
 import { useDispatch, useSelector } from "react-redux";
+import "../styles/CoinProfile.css";
 
 export default function CoinProfile() {
   const params = useParams();
@@ -37,17 +38,21 @@ export default function CoinProfile() {
         <div>
           <h5>Market Cap Rank: {data.market_cap_rank}</h5>
           <h5>Date Created: {data.genesis_date}</h5>
-          <h5>Total Supply: {data.total_supply}</h5>
-          <h5>Max Supply: {data.max_supply}</h5>
-          <h5>Circulating Supply: {data.circulating_supply}</h5>
+          <h5>Total Supply: {data.market_data.total_supply}</h5>
+          <h5>Max Supply: {data.market_data.max_supply}</h5>
+          <h5>Circulating Supply: {data.market_data.circulating_supply}</h5>
         </div>
         {/* Developer stats from coin gecko */}
         <div onClick={handleClick}>
           {showDevData ? (
-            <h3 id="dev-data">Show Dev Data</h3>
+            <h3 className="stats" id="dev-data">
+              Show Dev Data
+            </h3>
           ) : (
             <div>
-              <h3 id="dev-data">Developer Data</h3>
+              <h3 className="stats" id="dev-data">
+                Developer Data
+              </h3>
               <h5>Forks: {data.developer_data.forks}</h5>
               <h5>Stars: {data.developer_data.stars}</h5>
               <h5>Subscribers: {data.developer_data.subscribers}</h5>
@@ -65,10 +70,14 @@ export default function CoinProfile() {
         </div>
         <div onClick={handleClick}>
           {showCommData ? (
-            <h3 id="comm-data">Show Comm Data</h3>
+            <h3 className="stats" id="comm-data">
+              Show Comm Data
+            </h3>
           ) : (
             <div>
-              <h3 id="comm-data">Community Data</h3>
+              <h3 className="stats" id="comm-data">
+                Community Data
+              </h3>
               <h5>Facebook Likes: {data.community_data.facebook_likes}</h5>
               <h5>
                 Twitter Followers: {data.community_data.twitter_followers}
@@ -92,6 +101,8 @@ export default function CoinProfile() {
             </div>
           )}
         </div>
+        <h2>{data.market_data.current_price.usd}</h2>
+        <h2>{data.market_data.price_change_percentage_24h}</h2>
       </div>
 
       {data.description && <p>{data.description.en}</p>}
