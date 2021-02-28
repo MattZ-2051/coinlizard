@@ -53,8 +53,20 @@ export default function CoinProfile() {
           <h5>Facebook Likes: {data.community_data.facebook_likes}</h5>
           <h5>Twitter Followers: {data.community_data.twitter_followers}</h5>
           <h5>
-            Reddit average posts 48h:{" "}
+            Reddit average posts 48h:
             {data.community_data.reddit_average_posts_48h}
+          </h5>
+          <h5>
+            Reddit average comments 48h:
+            {data.community_data.reddit_average_comments_48h}
+          </h5>
+          <h5>
+            Reddit Subscribers:
+            {data.community_data.reddit_subscribers}
+          </h5>
+          <h5>
+            Telegram Channel User Count:{" "}
+            {data.community_data.telegram_channel_user_count}
           </h5>
         </div>
       </div>
