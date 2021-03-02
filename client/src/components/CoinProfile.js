@@ -3,13 +3,11 @@ import { useParams } from "react-router-dom";
 import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
 import { useDispatch, useSelector } from "react-redux";
 import CanvasJSReact from '../canvasjs.react';
+import "../styles/CoinProfile.css";
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const points = [];
-
-import "../styles/CoinProfile.css";
-
 
 export default function CoinProfile() {
   const [showDevData, setShowDevData] = useState(true);
@@ -85,7 +83,9 @@ export default function CoinProfile() {
 
       <div style={{ display: "flex" }}>
         <div>
-          <img src={data.image.large} alt="" />
+          {data.image && ( 
+            <img src={data.image.large} alt="" />
+          )}
           <h1>
             {data.id}({data.symbol})
           </h1>
@@ -93,9 +93,14 @@ export default function CoinProfile() {
         <div>
           <h5>Market Cap Rank: {data.market_cap_rank}</h5>
           <h5>Date Created: {data.genesis_date}</h5>
-          <h5>Total Supply: {data.market_data.total_supply}</h5>
-          <h5>Max Supply: {data.market_data.max_supply}</h5>
-          <h5>Circulating Supply: {data.market_data.circulating_supply}</h5>
+          {data.market_data && (
+            <>
+              <h5>Total Supply: {data.market_data.total_supply}</h5>
+              <h5>Max Supply: {data.market_data.max_supply}</h5>
+              <h5>Circulating Supply: {data.market_data.circulating_supply}</h5>
+            </>
+          )}
+          
         </div>
         {/* Developer stats from coin gecko */}
         <div onClick={handleClick}>
@@ -156,11 +161,15 @@ export default function CoinProfile() {
             </div>
           )}
         </div>
-        <h2>{data.market_data.current_price.usd}</h2>
-        <h2>{data.market_data.price_change_percentage_24h}</h2>
+        {data.market_data && (
+          <>
+            <h2>{data.market_data.current_price.usd}</h2>
+            <h2>{data.market_data.price_change_percentage_24h}</h2>
+          </>
+        )}
       </div>
 
-      {data.description && <p>{data.description.en}</p>}
+      {data.description && <p dangerouslySetInnerHTML={{__html: data.description.en}}></p>}
 
       <div>
         <CanvasJSChart options = {options}
