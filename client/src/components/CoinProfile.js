@@ -22,15 +22,14 @@ export default function CoinProfile() {
     for (let i = 0; i < array.length; i++) {
       if (i % 24 === 0) {
         const date = new Date(array[i][0])
-        // console.log(date.toLocaleDateString('en-US'));
         points.push({ x: new Date(date.toLocaleDateString('en-US')), y:array[i][1] })
       }
     }
   }
   
-  useEffect(() => {
-    dispatch(fetchData(params.coinId));
-  }, [params]); 
+  // useEffect(() => {
+  //   dispatch(fetchData(params.coinId));
+  // }, [params]); 
   
   useEffect(() => {
     dispatch(fetchData(params.coinId));
@@ -41,7 +40,6 @@ export default function CoinProfile() {
   useEffect(() => {
     if (prices) {
       getGraphData(prices);
-      //console.log(points)
     }
   }, [prices])
 
@@ -62,11 +60,6 @@ export default function CoinProfile() {
      }]
   }
   
-
- 
-
-
-
   const handleClick = (e) => {
     if (e.target.id === "dev-data") {
       setShowDevData(!showDevData);
@@ -79,8 +72,6 @@ export default function CoinProfile() {
 
   return (
     <>
-      <a href="/">Home Page</a>
-
       <div style={{ display: "flex" }}>
         <div>
           {data.image && ( 

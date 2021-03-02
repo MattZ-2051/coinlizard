@@ -20,27 +20,27 @@ export default function Crypto({ coin }) {
   };
 
   return (
-    <tr key={coin.id} onClick={handleClick}>
-      <td>
-        <img
-          src={coin.image}
-          style={{ width: 25, height: 25, marginRight: 10 }}
-        />
-        {coin.symbol.toUpperCase()}
-      </td>
-      <td>
-        <span
-          className={
-            coin.price_change_percentage_24h > 0
-              ? "text-success"
-              : "text-danger"
-          }
-        >
-          {formatPercent(coin.price_change_percentage_24h)}
-        </span>
-      </td>
-      <td>{formatDollar(coin.current_price, 20)}</td>
-      <td>{formatDollar(coin.market_cap, 12)}</td>
-    </tr>
+      <tr style={{fontWeight: 'bold'}} key={coin.id} onClick={handleClick}>
+        <td>
+          <img
+            src={coin.image}
+            style={{ width: 25, height: 25, marginRight: 10 }}
+          />
+          {coin.symbol.toUpperCase()}
+        </td>
+        <td style={{fontWeight: 'bold'}}> 
+          <span
+            className={
+              coin.price_change_percentage_24h > 0
+                ? "text-success"
+                : "text-danger"
+            }
+          >
+            {formatPercent(coin.price_change_percentage_24h)}
+          </span>
+        </td>
+        <td style={{fontWeight: 'bold'}}>{formatDollar(coin.current_price, 20)}</td>
+        <td style={{fontWeight: 'bold'}}>{formatDollar(coin.market_cap, 12)}</td>
+      </tr>
   );
 }
