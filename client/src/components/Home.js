@@ -27,7 +27,7 @@ function Home() {
     <div>
       <title>Coinmarketcap clone</title>
 
-      <h1>Coinmarketcap clone</h1>
+      <h1></h1>
 
       <table className="table">
         <thead>
