@@ -36,6 +36,7 @@ function Home() {
             <th>24H Change</th>
             <th>Price</th>
             <th>Market cap</th>
+            <th>Favorited</th>
           </tr>
         </thead>
         <tbody>

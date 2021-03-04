@@ -1,5 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import unfavorite from '../images/unfavorite.png';
+import favorite from '../images/favorite.png';
 
 export default function Crypto({ coin }) {
   // Helper function to turn number into percent
@@ -41,6 +43,9 @@ export default function Crypto({ coin }) {
         </td>
         <td style={{fontWeight: 'bold'}}>{formatDollar(coin.current_price, 20)}</td>
         <td style={{fontWeight: 'bold'}}>{formatDollar(coin.market_cap, 12)}</td>
+        <td>
+          <img  style={{height: 30, paddingLeft: 35}} src={unfavorite} />
+        </td>
       </tr>
   );
 }
