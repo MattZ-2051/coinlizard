@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
 import { useDispatch, useSelector } from "react-redux";
-import CanvasJSReact from '../canvasjs.react';
+import CanvasJSReact from "../canvasjs.react";
+import "../styles/CoinProfile.css";
+
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const points = [];
-
-import "../styles/CoinProfile.css";
-
 
 export default function CoinProfile() {
   const [showDevData, setShowDevData] = useState(true);
@@ -18,22 +17,25 @@ export default function CoinProfile() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.coinReducer);
 
-  const prices = useSelector((state) => state.coinReducer.prices)
+  const prices = useSelector((state) => state.coinReducer.prices);
 
   function getGraphData(array) {
     for (let i = 0; i < array.length; i++) {
       if (i % 24 === 0) {
-        const date = new Date(array[i][0])
+        const date = new Date(array[i][0]);
         // console.log(date.toLocaleDateString('en-US'));
-        points.push({ x: new Date(date.toLocaleDateString('en-US')), y:array[i][1] })
+        points.push({
+          x: new Date(date.toLocaleDateString("en-US")),
+          y: array[i][1],
+        });
       }
     }
   }
-  
+
   useEffect(() => {
     dispatch(fetchData(params.coinId));
-  }, [params]); 
-  
+  }, [params]);
+
   useEffect(() => {
     dispatch(fetchData(params.coinId));
 
@@ -45,29 +47,25 @@ export default function CoinProfile() {
       getGraphData(prices);
       //console.log(points)
     }
-  }, [prices])
-
+  }, [prices]);
 
   const options = {
     title: {
-      text: `Stock price of ${params.coinId}`
+      text: `Stock price of ${params.coinId}`,
     },
     axisY: {
       title: "Price in USD",
-      prefix: "$"
+      prefix: "$",
     },
-    data: [{				
-              type: "line",
-              xValueFormatString: 'MMM YYYY',
-              yValueFormatString: "$#,##0.000",
-              dataPoints: points
-     }]
-  }
-  
-
- 
-
-
+    data: [
+      {
+        type: "line",
+        xValueFormatString: "MMM YYYY",
+        yValueFormatString: "$#,##0.000",
+        dataPoints: points,
+      },
+    ],
+  };
 
   const handleClick = (e) => {
     if (e.target.id === "dev-data") {
@@ -79,6 +77,7 @@ export default function CoinProfile() {
 
   if (Object.keys(data).length === 0) return null;
 
+  console.log(data);
   return (
     <>
       <a href="/">Home Page</a>
@@ -163,8 +162,9 @@ export default function CoinProfile() {
       {data.description && <p>{data.description.en}</p>}
 
       <div>
-        <CanvasJSChart options = {options}
-            /* onRef = {ref => this.chart = ref} */
+        <CanvasJSChart
+          options={options}
+          /* onRef = {ref => this.chart = ref} */
         />
       </div>
     </>
