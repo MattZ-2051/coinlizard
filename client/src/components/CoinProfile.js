@@ -4,7 +4,6 @@ import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
 import { useDispatch, useSelector } from "react-redux";
 import CanvasJSReact from "../canvasjs.react";
 import "../styles/CoinProfile.css";
-
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -23,7 +22,6 @@ export default function CoinProfile() {
     for (let i = 0; i < array.length; i++) {
       if (i % 24 === 0) {
         const date = new Date(array[i][0]);
-        // console.log(date.toLocaleDateString('en-US'));
         points.push({
           x: new Date(date.toLocaleDateString("en-US")),
           y: array[i][1],
@@ -32,9 +30,9 @@ export default function CoinProfile() {
     }
   }
 
-  useEffect(() => {
-    dispatch(fetchData(params.coinId));
-  }, [params]);
+  // useEffect(() => {
+  //   dispatch(fetchData(params.coinId));
+  // }, [params]);
 
   useEffect(() => {
     dispatch(fetchData(params.coinId));
@@ -45,7 +43,6 @@ export default function CoinProfile() {
   useEffect(() => {
     if (prices) {
       getGraphData(prices);
-      //console.log(points)
     }
   }, [prices]);
 
@@ -80,11 +77,9 @@ export default function CoinProfile() {
   console.log(data);
   return (
     <>
-      <a href="/">Home Page</a>
-
       <div style={{ display: "flex" }}>
         <div>
-          <img src={data.image.large} alt="" />
+          {data.image && <img src={data.image.large} alt="" />}
           <h1>
             {data.id}({data.symbol})
           </h1>
@@ -92,9 +87,13 @@ export default function CoinProfile() {
         <div>
           <h5>Market Cap Rank: {data.market_cap_rank}</h5>
           <h5>Date Created: {data.genesis_date}</h5>
-          <h5>Total Supply: {data.market_data.total_supply}</h5>
-          <h5>Max Supply: {data.market_data.max_supply}</h5>
-          <h5>Circulating Supply: {data.market_data.circulating_supply}</h5>
+          {data.market_data && (
+            <>
+              <h5>Total Supply: {data.market_data.total_supply}</h5>
+              <h5>Max Supply: {data.market_data.max_supply}</h5>
+              <h5>Circulating Supply: {data.market_data.circulating_supply}</h5>
+            </>
+          )}
         </div>
         {/* Developer stats from coin gecko */}
         <div onClick={handleClick}>
@@ -155,11 +154,17 @@ export default function CoinProfile() {
             </div>
           )}
         </div>
-        <h2>{data.market_data.current_price.usd}</h2>
-        <h2>{data.market_data.price_change_percentage_24h}</h2>
+        {data.market_data && (
+          <>
+            <h2>{data.market_data.current_price.usd}</h2>
+            <h2>{data.market_data.price_change_percentage_24h}</h2>
+          </>
+        )}
       </div>
 
-      {data.description && <p>{data.description.en}</p>}
+      {data.description && (
+        <p dangerouslySetInnerHTML={{ __html: data.description.en }}></p>
+      )}
 
       <div>
         <CanvasJSChart

@@ -1,10 +1,14 @@
+* {
+    font-family: "Lucida Console", "Courier New", monospace;
+}
 body {
-    padding: 10px;
+    padding: 5px 30px 5px 30px;
 }
 .main {
     display: flex;
     justify-content: center;
     width: 100%;
+    font-weight: bold;
 }
 
 .header-main {
@@ -12,7 +16,7 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    background-color: #BFCDE0;
+    background-color: #86A873;
     margin: 5px;
     border-radius: 10px;
 }
@@ -24,6 +28,10 @@ body {
     width: 100%;
 }
 
+.logo {
+    height: 100px;
+    width: 350px;
+}
 .column-2 {
     grid-column: 2 / 3;
 }
@@ -46,5 +54,5 @@ body {
 } */
 
 .icons {
-    height: 50px;
+    height: 40px;
 }

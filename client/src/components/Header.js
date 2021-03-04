@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "../actions/userActions.js";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import profileIcon from "../images/profile.png";
 import logoutIcon from "../images/logout.png";
+import logo from '../images/logo.png';
 import "../styles/header.css";
 
 const Header = () => {
@@ -23,7 +24,10 @@ const Header = () => {
     <div className="main">
       <div className="header-main">
         <div className="column-1">
-          <h3>Coin Lizard</h3>
+            <a href='/'>
+                <img className='logo' src={logo}></img>
+            </a>
+          
         </div>
         <div className="column-2"></div>
         <div className="column-3">
@@ -37,18 +41,10 @@ const Header = () => {
               <a href="/api/logout">
                 <img className="icons" src={logoutIcon} />
               </a>
-              {/* <div className='col-3-1'>
-                                <a href='/api/logout'>
-                                    <img className='icons' src={logoutIcon} />
-                                </a>
-                            </div>
-                            <div className='col-3-2'>
-                                <img className='icons' src={profileIcon} onClick={handleClick}></img>
-                            </div> */}
             </>
           ) : (
             <div>
-              <a href="/auth/google">Login With Google</a>
+              <a style={{color: 'black'}} href="/auth/google">Login With Google</a>
             </div>
           )}
         </div>
