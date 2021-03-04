@@ -1,4 +1,5 @@
 const passport = require('passport');
+const { Favorite } = require('../models/Favorite.js');
 
 module.exports = (app) => { 
     // when using auth, new GoogleStrategy() uses string of 'google' hence why <passport.authenticate('google'...)> below
@@ -23,9 +24,5 @@ module.exports = (app) => {
         res.send(req.user);
     });
 
-    app.get('/api/test', (req, res) => {
-        res.send({
-            hello: 'Hello'
-        });
-    }); 
+    
 }
