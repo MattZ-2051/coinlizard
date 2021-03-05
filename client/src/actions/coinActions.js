@@ -19,3 +19,5 @@ export const fetchTwoWeekData = (id) => async (dispatch) => {
     dispatch({ type: coinConstant.FETCH_COIN_DATA, payload: res.data})
   }
 }
+
+
