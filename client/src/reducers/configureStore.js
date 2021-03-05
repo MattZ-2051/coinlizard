@@ -2,10 +2,12 @@ import { createStore, compose, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import authReducer from "./authReducer.js";
 import coinReducer from "./coinReducer.js";
+import favoriteReducer from './favoriteReducer.js';
 
 const rootReducer = combineReducers({
   authReducer,
   coinReducer,
+  favoriteReducer
 });
 
 let storeEnhancer;

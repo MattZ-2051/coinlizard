@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
+import { addFavorite } from '../actions/favoriteActions';
 import { useDispatch, useSelector } from "react-redux";
+import unfavorite from '../images/unfavorite.png';
 import CanvasJSReact from "../canvasjs.react";
 import "../styles/CoinProfile.css";
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -15,7 +17,7 @@ export default function CoinProfile() {
   const params = useParams();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.coinReducer);
-
+  const user = useSelector((state) => state.authReducer);
   const prices = useSelector((state) => state.coinReducer.prices);
 
   function getGraphData(array) {
@@ -29,11 +31,6 @@ export default function CoinProfile() {
       }
     }
   }
-
-  // useEffect(() => {
-  //   dispatch(fetchData(params.coinId));
-  // }, [params]);
-
   useEffect(() => {
     dispatch(fetchData(params.coinId));
 
@@ -72,9 +69,18 @@ export default function CoinProfile() {
     }
   };
 
+  const addToFavorites = (e) => {
+    e.preventDefault();
+
+    const form = {
+      coinName: data.id,
+      _user: user._id
+    }
+    dispatch(addFavorite(form));
+  }
+
   if (Object.keys(data).length === 0) return null;
 
-  console.log(data);
   return (
     <>
       <div style={{ display: "flex" }}>
@@ -154,6 +160,7 @@ export default function CoinProfile() {
             </div>
           )}
         </div>
+        
         {data.market_data && (
           <>
             <h2>{data.market_data.current_price.usd}</h2>
@@ -161,7 +168,7 @@ export default function CoinProfile() {
           </>
         )}
       </div>
-
+      <img  onClick={addToFavorites} style={{height: 30, paddingLeft: 35}} src={unfavorite} />
       {data.description && (
         <p dangerouslySetInnerHTML={{ __html: data.description.en }}></p>
       )}
