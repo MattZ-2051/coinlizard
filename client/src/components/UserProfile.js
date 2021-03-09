@@ -16,9 +16,7 @@ const UserProfile = () => {
         dispatch(getFavorites(user._id))
     }, [dispatch]);
 
-    // useEffect(() => {
-        
-    // }, [user])
+   
     return (
         <>
             {user && (
