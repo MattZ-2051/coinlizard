@@ -74,13 +74,13 @@ export default function CoinProfile() {
 
     const form = {
       coinName: data.id,
-      _user: user._id,
-    };
+      _user: user._id
+    }
     dispatch(addFavorite(form));
   };
 
   if (Object.keys(data).length === 0) return null;
-
+  console.log(data.market_data);
   return (
     <>
       <div style={{ display: "flex" }}>
