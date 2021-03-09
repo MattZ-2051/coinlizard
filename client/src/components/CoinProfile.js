@@ -74,13 +74,16 @@ export default function CoinProfile() {
 
     const form = {
       coinName: data.id,
+      // dailyChange: data.market_data.price_change_percentage_24h,
+      // price: data.market_data.current_price.usd,
+      // marketCap: data.market_data.market_cap.usd,
       _user: user._id
     }
     dispatch(addFavorite(form));
   }
 
   if (Object.keys(data).length === 0) return null;
-
+  console.log(data.market_data);
   return (
     <>
       <div style={{ display: "flex" }}>
