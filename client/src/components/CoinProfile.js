@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
-import { addFavorite } from '../actions/favoriteActions';
+import { addFavorite } from "../actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
-import unfavorite from '../images/unfavorite.png';
+import unfavorite from "../images/unfavorite.png";
 import CanvasJSReact from "../canvasjs.react";
 import "../styles/CoinProfile.css";
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -74,13 +74,10 @@ export default function CoinProfile() {
 
     const form = {
       coinName: data.id,
-      // dailyChange: data.market_data.price_change_percentage_24h,
-      // price: data.market_data.current_price.usd,
-      // marketCap: data.market_data.market_cap.usd,
       _user: user._id
     }
     dispatch(addFavorite(form));
-  }
+  };
 
   if (Object.keys(data).length === 0) return null;
   console.log(data.market_data);
@@ -107,14 +104,14 @@ export default function CoinProfile() {
         {/* Developer stats from coin gecko */}
         <div onClick={handleClick}>
           {showDevData ? (
-            <h3 className="stats" id="dev-data">
+            <button className="stats" id="dev-data">
               Show Dev Data
-            </h3>
+            </button>
           ) : (
             <div>
-              <h3 className="stats" id="dev-data">
-                Developer Data
-              </h3>
+              <button className="stats" id="dev-data">
+                Close Developer Data
+              </button>
               <h5>Forks: {data.developer_data.forks}</h5>
               <h5>Stars: {data.developer_data.stars}</h5>
               <h5>Subscribers: {data.developer_data.subscribers}</h5>
@@ -132,14 +129,14 @@ export default function CoinProfile() {
         </div>
         <div onClick={handleClick}>
           {showCommData ? (
-            <h3 className="stats" id="comm-data">
+            <button className="stats" id="comm-data">
               Show Comm Data
-            </h3>
+            </button>
           ) : (
             <div>
-              <h3 className="stats" id="comm-data">
-                Community Data
-              </h3>
+              <button className="stats" id="comm-data">
+                Close Community Data
+              </button>
               <h5>Facebook Likes: {data.community_data.facebook_likes}</h5>
               <h5>
                 Twitter Followers: {data.community_data.twitter_followers}
@@ -163,7 +160,7 @@ export default function CoinProfile() {
             </div>
           )}
         </div>
-        
+
         {data.market_data && (
           <>
             <h2>{data.market_data.current_price.usd}</h2>
@@ -171,7 +168,11 @@ export default function CoinProfile() {
           </>
         )}
       </div>
-      <img  onClick={addToFavorites} style={{height: 30, paddingLeft: 35}} src={unfavorite} />
+      <img
+        onClick={addToFavorites}
+        style={{ height: 30, paddingLeft: 35 }}
+        src={unfavorite}
+      />
       {data.description && (
         <p dangerouslySetInnerHTML={{ __html: data.description.en }}></p>
       )}
