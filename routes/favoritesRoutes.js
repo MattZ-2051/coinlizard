@@ -4,6 +4,7 @@ const requireLogin = require('../middlewares/requireLogin.js');
 const Favorite = mongoose.model('favorites')
 module.exports = app => {
     app.post('/api/favorites', (req, res) => {
+        console.log('this is the req body', req.body)
         const { coinName } = req.body;
         // , dailyChange, price, marketCap
         Favorite.findOne({ coinName: coinName }) // queries db for coinName matching the coinName in the req body
@@ -21,13 +22,14 @@ module.exports = app => {
                             .save() //.save() saves data to the database
                     }
                 })
-        // const favorite = new Favorite({
-        //     coinName: coinName,
-        //     _user: req.user.id
-        // })
-        // favorite.save();
     });
 
+    app.delete('/api/favorites/delete/:id', (req, res) => {
+        const id = req.params.id;
+        Favorite.deleteOne({ coinName: id, _user: req.user._id }).then(function(favorite) {
+            console.log('deleted')
+        });
+    })
     app.get('/api/favorites/:_user', (req ,res) => {
         // const { _id } = req.user;
         // console.log(req.user._id);
