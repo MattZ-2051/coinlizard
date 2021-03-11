@@ -58,7 +58,7 @@ export default function Crypto({ coin }) {
             src={coin.image}
             style={{ width: 25, height: 25, marginRight: 10 }}
           />
-          <a onClick={handleClick}>
+          <a href={`/coin-profile/${coin.id}`} style={{color: 'black'}}>
             {coin.symbol.toUpperCase()}
           </a> 
         </td>

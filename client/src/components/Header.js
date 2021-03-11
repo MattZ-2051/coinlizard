@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "../actions/userActions.js";
 import { NavLink, useHistory } from "react-router-dom";
+import Search from './Search';
 import profileIcon from "../images/profile.png";
 import logoutIcon from "../images/logout.png";
 import logo from '../images/logo.png';
@@ -29,7 +30,9 @@ const Header = () => {
             </a>
           
         </div>
-        <div className="column-2"></div>
+        <div className="column-2">
+            <Search />
+        </div>
         <div className="column-3">
           {user ? (
             <>

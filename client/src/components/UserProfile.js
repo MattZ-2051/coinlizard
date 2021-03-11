@@ -20,7 +20,7 @@ const UserProfile = () => {
     return (
         <>
             {user && (
-                <h1>{user.name}</h1>
+                <h2>Hi {user.name}, these are the cryptos on your watchlist:</h2>
             )}
             <table className="table">
                 <thead>
