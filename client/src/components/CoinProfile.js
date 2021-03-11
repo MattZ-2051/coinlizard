@@ -33,7 +33,6 @@ export default function CoinProfile() {
   }
   useEffect(() => {
     dispatch(fetchData(params.coinId));
-
     dispatch(fetchTwoWeekData(params.coinId));
   }, [dispatch]);
 

@@ -26,20 +26,18 @@ const Search = () => {
         // onSearch will have as the first callback parameter
         // the string searched and for the second the results.
         console.log(string, results)
-        return (
-            <div className='item'>
-                <div className='content'>
-                    <div className='header'>
-                        {results.id}
-                    </div>
-                </div>
-            </div>
-        )
+        // return (
+        //     <a href={`/coin-profile/${results.id}`}className='header'>
+        //         {results.id}
+        //     </a>
+        
+        // )
     }
 
     const handleOnSelect = (item) => {
         // the item selected
         history.push(`/coin-profile/${item.id}`);
+        window.location.reload(false);
     }
     
     return (
@@ -49,7 +47,9 @@ const Search = () => {
                 onSearch={handleOnSearch}
                 onSelect={handleOnSelect}
                 autoFocus
-          />
+                styling={{fontWeight: 'bold'}}
+                placeholder={'Search for a currency'}
+            />
         </div>
     )
 }
