@@ -6,7 +6,6 @@ import Coin from "./Coin";
 
 // instance of CoinGecko client to use for api calls
 const coinGeckoClient = new CoinGecko();
-
 function Home() {
   const [coinData, setCoinData] = useState([]);
 
@@ -22,6 +21,7 @@ function Home() {
 
     fetchData();
   }, []);
+
 
   return (
     <div>
