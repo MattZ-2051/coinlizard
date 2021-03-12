@@ -25,7 +25,7 @@ const Header = () => {
     <div className="main">
       <div className="header-main">
         <div className="column-1">
-            <a href='/'>
+            <a href='/home'>
                 <img className='logo' src={logo}></img>
             </a>
           

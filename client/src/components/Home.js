@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import CoinGecko from "coingecko-api";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Coin from "./Coin";
+import Header from './Header';
+import { getFavorites, addFavorite, removeFavorite } from '../actions/favoriteActions.js';
 
 // instance of CoinGecko client to use for api calls
 const coinGeckoClient = new CoinGecko();
+
 function Home() {
   const [coinData, setCoinData] = useState([]);
+  const user = useSelector(state => state.authReducer);
+  const favorites = useSelector(state => state.favoriteReducer);
+  const dispatch = useDispatch();
 
+  console.log('====', favorites)
   useEffect(() => {
     // function making calls to Coin Gecko API, results are ordered by market cap
     async function fetchData() {
@@ -18,13 +26,24 @@ function Home() {
       const result = await coinGeckoClient.coins.markets({ params });
       setCoinData(result.data);
     }
-
+    dispatch(getFavorites(user._id));
     fetchData();
   }, []);
 
+  const isFavorited = (array, coin) => {
+    for (let i = 0; i < array.length; i++) {
+      let obj = array[i];
+      if (obj[Object.keys(obj)[1]] === coin.id) {
+        console.log(coin.id);
+        return true;
+      }
+    }
+    return false;
+  }
 
   return (
-    <div>
+    <div style={{padding: '50px'}}>
+      <Header />
       <title>Coinmarketcap clone</title>
 
       <h1></h1>
@@ -42,7 +61,8 @@ function Home() {
         <tbody>
           {coinData ? (
             coinData.map((coin) => {
-              return <Coin coin={coin} key={coin.id} />;
+              
+              return <Coin coin={coin} key={coin.id} isFavorited={isFavorited(favorites, coin)}/>;
             })
           ) : (
             <h1>Loading...</h1>
