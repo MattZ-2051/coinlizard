@@ -20,7 +20,6 @@ export default function Crypto({ coin, isFavorited }) {
 
   const user = useSelector(state => state.authReducer);
   const favorites = useSelector(state => state.favoriteReducer);
-  const [isFavorite, setIsFavorite] = useState(false)
   const history = useHistory();
   const dispatch = useDispatch();
   
