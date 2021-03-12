@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import unfavorite from '../images/unfavorite.png';
 import favorite from '../images/favorite.png';
 import { getFavorites, addFavorite, removeFavorite } from '../actions/favoriteActions.js';
-import { STATES } from "mongoose";
+
 
 export default function Crypto({ coin, isFavorited }) {
   // Helper function to turn number into percent
