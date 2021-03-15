@@ -3,6 +3,7 @@ import CoinGecko from "coingecko-api";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Coin from "./Coin";
+import Loading from "./Loading";
 
 // instance of CoinGecko client to use for api calls
 const coinGeckoClient = new CoinGecko();
@@ -22,12 +23,10 @@ function Home() {
     fetchData();
   }, []);
 
-
   return (
     <div>
       <title>Coinmarketcap clone</title>
-
-      <h1></h1>
+      <Loading />
 
       <table className="table">
         <thead>

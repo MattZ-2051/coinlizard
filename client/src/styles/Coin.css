@@ -1,0 +1,8 @@
+.coin-row {
+  font-weight: 700;
+}
+
+.coin-row:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

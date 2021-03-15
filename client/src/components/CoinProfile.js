@@ -73,8 +73,8 @@ export default function CoinProfile() {
 
     const form = {
       coinName: data.id,
-      _user: user._id
-    }
+      _user: user._id,
+    };
     dispatch(addFavorite(form));
   };
 
@@ -82,7 +82,7 @@ export default function CoinProfile() {
   console.log(data.market_data);
   return (
     <>
-      <div style={{ display: "flex" }}>
+      <div className="coin" style={{ display: "flex" }}>
         <div>
           {data.image && <img src={data.image.large} alt="" />}
           <h1>
