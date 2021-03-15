@@ -39,21 +39,21 @@ const Loading = () => {
     >
       <motion.img
         className="loading-circle"
-        src="client/src/images/favorite.png"
+        src="../images/favorite.png"
         variants={loadingCircleVariants}
         transition={loadingCircleTransition}
         alt=""
       />
       <motion.img
         className="loading-circle"
-        src="client/src/images/favorite.png"
+        src="../images/favorite.png"
         variants={loadingCircleVariants}
         transition={loadingCircleTransition}
         alt=""
       />
       <motion.img
         className="loading-circle"
-        src="client/src/images/favorite.png"
+        src="../images/favorite.png"
         variants={loadingCircleVariants}
         transition={loadingCircleTransition}
         alt=""

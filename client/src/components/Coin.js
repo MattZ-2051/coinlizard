@@ -41,11 +41,6 @@ export default function Crypto({ coin, isFavorited }) {
       _user: user._id,
     };
 
-    const form = {
-      coinName: coin.id,
-      _user: user._id,
-    };
-
     if (isFavorited === false) {
       //setIsFavorite(true);
       dispatch(addFavorite(form));

@@ -5,6 +5,7 @@ import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Coin from "./Coin";
 import Header from "./Header";
+import Loading from "../components/Loading";
 import {
   getFavorites,
   addFavorite,
