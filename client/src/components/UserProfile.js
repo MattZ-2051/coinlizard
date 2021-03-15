@@ -4,6 +4,7 @@ import { fetchUser } from '../actions/userActions.js';
 import { getFavorites } from '../actions/favoriteActions';
 import Coin from './Coin.js';
 import Favorite from './Favorite';
+import Header from './Header.js';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const UserProfile = () => {
@@ -19,6 +20,7 @@ const UserProfile = () => {
    
     return (
         <>
+            <Header />
             {user && (
                 <h2>Hi {user.name}, these are the cryptos on your watchlist:</h2>
             )}

@@ -1,14 +1,15 @@
 * {
     font-family: "Lucida Console", "Courier New", monospace;
 }
-body {
+/* body {
     padding: 5px 30px 5px 30px;
-}
+} */
 .main {
     display: flex;
     justify-content: center;
     width: 100%;
     font-weight: bold;
+    /* padding: 5px 30px 5px 30px; */
 }
 
 .header-main {

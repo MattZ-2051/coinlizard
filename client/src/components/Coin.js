@@ -8,10 +8,8 @@ import {
   addFavorite,
   removeFavorite,
 } from "../actions/favoriteActions.js";
-import { STATES } from "mongoose";
-import "../styles/Coin.css";
 
-export default function Crypto({ coin }) {
+export default function Crypto({ coin, isFavorited }) {
   // Helper function to turn number into percent
   const formatPercent = (number) => `${new Number(number).toFixed(2)}%`;
 
@@ -25,7 +23,6 @@ export default function Crypto({ coin }) {
 
   const user = useSelector((state) => state.authReducer);
   const favorites = useSelector((state) => state.favoriteReducer);
-  const [isFavorite, setIsFavorite] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -44,18 +41,22 @@ export default function Crypto({ coin }) {
       _user: user._id,
     };
 
-    if (isFavorite === false) {
-      setIsFavorite(true);
+    const form = {
+      coinName: coin.id,
+      _user: user._id,
+    };
+
+    if (isFavorited === false) {
+      //setIsFavorite(true);
       dispatch(addFavorite(form));
     } else {
-      console.log(favorites._id);
-      setIsFavorite(false);
+      //setIsFavorite(false);
       dispatch(removeFavorite(coin.id, form));
     }
   };
 
   return (
-    <tr key={coin.id} className="coin-row">
+    <tr style={{ fontWeight: "bold" }} key={coin.id}>
       <td>
         <img
           src={coin.image}
@@ -83,7 +84,7 @@ export default function Crypto({ coin }) {
         {formatDollar(coin.market_cap, 12)}
       </td>
       <td onClick={handleFavorites}>
-        {isFavorite ? (
+        {isFavorited ? (
           <img style={{ height: 30, paddingLeft: 35 }} src={favorite} />
         ) : (
           <img style={{ height: 30, paddingLeft: 35 }} src={unfavorite} />

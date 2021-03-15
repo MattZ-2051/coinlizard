@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import unfavorite from "../images/unfavorite.png";
 import CanvasJSReact from "../canvasjs.react";
 import "../styles/CoinProfile.css";
+import Header from "./Header.js";
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -82,7 +83,8 @@ export default function CoinProfile() {
   console.log(data.market_data);
   return (
     <>
-      <div className="coin" style={{ display: "flex" }}>
+      <Header />
+      <div style={{ display: "flex" }}>
         <div>
           {data.image && <img src={data.image.large} alt="" />}
           <h1>
