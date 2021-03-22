@@ -21,7 +21,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    padding-left: 50%;
 }
 
 .landing-button-google {
@@ -30,8 +29,24 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    padding-right: 50%;
 }
+
+.landing-button-1 {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.landing-button-2 {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .landing-col-3 {
     grid-column: 3/4;
     grid-row: 3/4;
@@ -44,4 +59,20 @@
     transform: rotate(45deg);
     height: 300px;
     width: 300px;
+}
+
+.btn {
+    width: 150px;
+    height: 60px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	background: var(--primary-color);
+	color: #fff;
+	border: solid #fff 1px;
+	opacity: 0.7;
+}
+
+.btn:hover {
+	transform: scale(0.98);
 }
