@@ -47,7 +47,7 @@ function Home() {
   };
 
   return (
-    <div style={{ padding: "50px" }}>
+    <div style={{ paddingLeft: "50px", paddingRight: "50px", paddingTop: "10px" }}>
       <Header />
       <title>Coinmarketcap clone</title>
       <Loading />

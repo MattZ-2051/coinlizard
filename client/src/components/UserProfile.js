@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchUser } from '../actions/userActions.js';
-import { getFavorites } from '../actions/favoriteActions';
+import { getFavorites, removeFavorite } from '../actions/favoriteActions';
 import Coin from './Coin.js';
 import Favorite from './Favorite';
 import Header from './Header.js';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const UserProfile = () => {
@@ -19,7 +20,7 @@ const UserProfile = () => {
 
    
     return (
-        <>
+        <div style={{ paddingLeft: "50px", paddingRight: "50px", paddingTop: "10px" }}>
             <Header />
             {user && (
                 <h2>Hi {user.name}, these are the cryptos on your watchlist:</h2>
@@ -35,13 +36,6 @@ const UserProfile = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {/* {coinData ? (
-                    coinData.map((coin) => {
-                    return <Coin coin={coin} key={coin.id} />;
-                    })
-                ) : (
-                    <h1>Loading...</h1>
-                )} */}
                    {favorites && (
                         favorites.map((favorite) => (
                         <Favorite coin={favorite} key={favorite.coinName}/>
@@ -49,7 +43,7 @@ const UserProfile = () => {
                 </tbody>
             </table>
             
-        </>
+        </div>
     )
 }
 
