@@ -35,7 +35,7 @@ export default function CoinProfile() {
   useEffect(() => {
     dispatch(fetchData(params.coinId));
     dispatch(fetchTwoWeekData(params.coinId));
-  }, [dispatch]);
+  }, [dispatch, fetchData, fetchTwoWeekData]);
 
   useEffect(() => {
     if (prices) {
@@ -80,9 +80,9 @@ export default function CoinProfile() {
   };
 
   if (Object.keys(data).length === 0) return null;
-  console.log(data.market_data);
+ 
   return (
-    <>
+    <div style={{ paddingLeft: "50px", paddingRight: "50px", paddingTop: "10px" }}>
       <Header />
       <div style={{ display: "flex" }}>
         <div>
@@ -184,6 +184,6 @@ export default function CoinProfile() {
           /* onRef = {ref => this.chart = ref} */
         />
       </div>
-    </>
+    </div>
   );
 }

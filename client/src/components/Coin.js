@@ -26,11 +26,6 @@ export default function Crypto({ coin, isFavorited }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // Funtion that handles a click on a currency and will direct user to currency page
-  const handleClick = async () => {
-    history.push(`/coin-profile/${coin.id}`);
-  };
-
   useEffect(() => {
     dispatch(getFavorites(user._id));
   }, [dispatch]);
