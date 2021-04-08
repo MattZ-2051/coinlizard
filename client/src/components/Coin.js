@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import unfavorite from "../images/unfavorite.png";
 import favorite from "../images/favorite.png";
 import {
@@ -52,9 +52,9 @@ export default function Crypto({ coin, isFavorited }) {
           src={coin.image}
           style={{ width: 25, height: 25, marginRight: 10 }}
         />
-        <a href={`/coin-profile/${coin.id}`} style={{ color: "black" }}>
+        <Link to={`/coin-profile/${coin.id}`} style={{ color: "#86A873" }}>
           {coin.symbol.toUpperCase()}
-        </a>
+        </Link>
       </td>
       <td style={{ fontWeight: "bold" }}>
         <span

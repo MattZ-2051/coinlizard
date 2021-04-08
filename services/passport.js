@@ -24,25 +24,20 @@ passport.use(
             callbackURL: '/auth/google/callback'
         },
         (accessToken, refreshToken, profile, done) => {
-            // console.log(accessToken);
-            // console.log(refreshToken);
-            
             const name = profile.name.givenName + ' ' + profile.name.familyName
-            console.log(profile);
             User.findOne({ googleId: profile.id }) // queries db for googleId matching profile.id
                 .then((existingUser) => {
                     if (existingUser) { // means user alreadt exists, do not create a new one
                         done(null, existingUser);
                     } else { // creates a new user with the profile id
                         new User({ 
-                                   googleId: profile.id, 
-                                   name: name
+                                    googleId: profile.id, 
+                                    name: name
                                 })
                             .save() //.save() saves data to the database
                             .then(user => done(null, user));
                     }
                 })
-
         }
     )
 );
