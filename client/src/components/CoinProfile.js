@@ -32,10 +32,11 @@ export default function CoinProfile() {
       }
     }
   }
+
   useEffect(() => {
     dispatch(fetchData(params.coinId));
     dispatch(fetchTwoWeekData(params.coinId));
-  }, [dispatch, fetchData, fetchTwoWeekData]);
+  }, [fetchData, fetchTwoWeekData]);
 
   useEffect(() => {
     if (prices) {
