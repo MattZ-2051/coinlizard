@@ -52,7 +52,7 @@ export default function Crypto({ coin, isFavorited }) {
           src={coin.image}
           style={{ width: 25, height: 25, marginRight: 10 }}
         />
-        <Link to={`/coin-profile/${coin.id}`} style={{ color: "#86A873" }}>
+        <Link to={`/coin-profile/${coin.id}`} style={{ color: "#000000" }}>
           {coin.symbol.toUpperCase()}
         </Link>
       </td>
