@@ -7,6 +7,8 @@
 --------------
 Coin Lizard is a MERN stack clone of [CoinGecko](https://www.coingecko.com/en) that allows users to view prices, market data and analysis of the top 200 crypto currencies. Coin Lizard utilizes the CoinGecko API to gather relevant data and displays it on a responsive React.js front-end. It leverages Google OAuth for a seamless authentication process which allows users to login/sign-up with their Gmail accounts. Users are also able to add specific cryptos to their watchlist which are then rendered on the user's profile page.
 
+![overview][./client/src/images/overview.gif]
+
 ## Front-End Technologies and Code Snippets
 ------  
 Coin Lizard is a MERN stack app which means that it utilizes JavaScript and React.js on the Front-End. Redux was also implemented in order to manage the application's state. The Coin Gecko API was used in order to gather and display all of the necessary data. This API was extremely well documented and had a ton of endpoints to work with which allowed us to extract prices, weekly changes, descriptions, market caps etc from the return objects. 
@@ -37,6 +39,38 @@ The action is then dispatched on the corresponding crypto's profile page where t
 </div>
 ```
 
+On the home page, we wanted users to have the ability to see which cryptos they have already favorited and also give them an option to favorite/unfavorite cryptos. For favoriting/unfavoriting, the handleFavorites() function is called whenever a user clicks on the star icon. If the *isFavorited* prop is *true*, it dispatches the removeFavorite() action which signifies that the user wants to remove the crypto from their watchlist. The back-end then makes a *delete* request and removes that entry from the *Favorites* cluster. If the *isFavorited* prop is *false*, it dispatches the addFavorite() action which signifies that the user wants to add the crypto to their watchlist. The back-end then makes a *post* request and adds that form entry to the *Favorites* cluster.
+
+```JavaScript
+const handleFavorites = (e) => {
+    const form = {
+      coinName: coin.id,
+      _user: user._id,
+    };
+
+    if (isFavorited === false) {
+      dispatch(addFavorite(form));
+    } else {
+      dispatch(removeFavorite(coin.id, form));
+    }
+  };
+```
+
+In order to display which cryptos a user has already favorited, the isFavorited() function is passed down as a prop from the *Home* component to the *Coin* component. isFavorited() takes in the array of *favorites* from the user's redux store and a *coinId* and returns a boolean whether or not that coinId appears in the user's *favorites* redux store.
+
+```JavaScript
+const favorites = useSelector((state) => state.favoriteReducer);
+
+const isFavorited = (array, coin) => {
+    for (let i = 0; i < array.length; i++) {
+      let obj = array[i];
+      if (obj[Object.keys(obj)[1]] === coin.id) {
+        return true;
+      }
+    }
+    return false;
+  };
+```
 
 ## Back-End Technologies and Code Snippets
 ------  

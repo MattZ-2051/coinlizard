@@ -21,7 +21,7 @@ function Home() {
   const favorites = useSelector((state) => state.favoriteReducer);
   const dispatch = useDispatch();
 
-  console.log("====", favorites);
+
   useEffect(() => {
     // function making calls to Coin Gecko API, results are ordered by market cap
     async function fetchData() {
@@ -39,7 +39,6 @@ function Home() {
     for (let i = 0; i < array.length; i++) {
       let obj = array[i];
       if (obj[Object.keys(obj)[1]] === coin.id) {
-        console.log(coin.id);
         return true;
       }
     }
