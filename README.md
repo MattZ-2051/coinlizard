@@ -7,7 +7,7 @@
 --------------
 Coin Lizard is a MERN stack clone of [CoinGecko](https://www.coingecko.com/en) that allows users to view prices, market data and analysis of the top 200 crypto currencies. Coin Lizard utilizes the CoinGecko API to gather relevant data and displays it on a responsive React.js front-end. It leverages Google OAuth for a seamless authentication process which allows users to login/sign-up with their Gmail accounts. Users are also able to add specific cryptos to their watchlist which are then rendered on the user's profile page.
 
-![overview][./client/src/images/overview.gif]
+![Overview](./client/src/images/overview.gif)
 
 ## Front-End Technologies and Code Snippets
 ------  
