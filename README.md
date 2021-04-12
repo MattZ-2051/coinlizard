@@ -40,7 +40,7 @@ The action is then dispatched on the corresponding crypto's profile page where t
 ```
 
 ### Favoriting/Unfavoriting
-![Favorite](./client/src/images/favorite/unfavorite.gif)
+![Favorite](./client/src/images/favorite-unfavorite.gif)
 
 On the home page, we wanted users to have the ability to see which cryptos they have already favorited and also give them an option to favorite/unfavorite cryptos. For favoriting/unfavoriting, the handleFavorites() function is called whenever a user clicks on the star icon. If the *isFavorited* prop is *true*, it dispatches the removeFavorite() action which signifies that the user wants to remove the crypto from their watchlist. The back-end then makes a *delete* request and removes that entry from the *Favorites* cluster. If the *isFavorited* prop is *false*, it dispatches the addFavorite() action which signifies that the user wants to add the crypto to their watchlist. The back-end then makes a *post* request and adds that form entry to the *Favorites* cluster.
 
