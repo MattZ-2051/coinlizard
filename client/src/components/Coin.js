@@ -27,7 +27,12 @@ export default function Crypto({ coin, isFavorited }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFavorites(user._id));
+    if (user) {
+      dispatch(getFavorites(user._id));
+    } else {
+      return
+    }
+    
   }, [dispatch]);
 
   const handleFavorites = (e) => {
@@ -73,13 +78,16 @@ export default function Crypto({ coin, isFavorited }) {
       <td style={{ fontWeight: "bold" }}>
         {formatDollar(coin.market_cap, 12)}
       </td>
-      <td onClick={handleFavorites}>
-        {isFavorited ? (
-          <img style={{ height: 30, paddingLeft: 35 }} src={favorite} />
-        ) : (
-          <img style={{ height: 30, paddingLeft: 35 }} src={unfavorite} />
-        )}
-      </td>
+      {user && (
+        <td onClick={handleFavorites}>
+          {isFavorited ? (
+            <img style={{ height: 30, paddingLeft: 35 }} src={favorite} />
+          ) : (
+            <img style={{ height: 30, paddingLeft: 35 }} src={unfavorite} />
+          )}  
+        </td>
+      )}
+      
     </tr>
   );
 }
