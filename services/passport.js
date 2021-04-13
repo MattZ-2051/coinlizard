@@ -32,7 +32,8 @@ passport.use(
                     } else { // creates a new user with the profile id
                         new User({ 
                                     googleId: profile.id, 
-                                    name: name
+                                    name: name,
+                                    profilePhoto: profile.photos[0].value
                                 })
                             .save() //.save() saves data to the database
                             .then(user => done(null, user));

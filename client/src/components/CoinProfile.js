@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
+import { fetchUser } from '../actions/userActions.js';
 import { addFavorite } from "../actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
+import { ResponsiveContainer, AreaChart, XAxis, YAxis, Area, Tooltip, CartesianGrid } from 'recharts';
+import CoinGecko from "coingecko-api";
 import unfavorite from "../images/unfavorite.png";
 import CanvasJSReact from "../canvasjs.react";
+import Search from './Search';
 import "../styles/CoinProfile.css";
 import Header from "./Header.js";
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const points = [];
+const coinGeckoClient = new CoinGecko();
 
 export default function CoinProfile() {
   const [showDevData, setShowDevData] = useState(true);
   const [showCommData, setShowCommData] = useState(true);
+  const [coinData, setCoinData] = useState([]);
   const params = useParams();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.coinReducer);
@@ -22,20 +28,36 @@ export default function CoinProfile() {
   const prices = useSelector((state) => state.coinReducer.prices);
 
   function getGraphData(array) {
+    console.log('//////', array[0])
     for (let i = 0; i < array.length; i++) {
+      
       if (i % 24 === 0) {
         const date = new Date(array[i][0]);
         points.push({
-          x: new Date(date.toLocaleDateString("en-US")),
-          y: array[i][1],
+          date: date.toLocaleDateString("en-US"),
+          value: array[i][1]
         });
       }
     }
   }
 
   useEffect(() => {
+    
+    async function fetchCoinData() {
+      const params = {
+        order: CoinGecko.ORDER.MARKET_CAP_DESC,
+      };
+      const result = await coinGeckoClient.coins.markets({ params });
+      for (let i = 0; i < 5; i++) {
+        coinData.push(result.data[i])
+      }
+    }
+
+  
+    dispatch(fetchUser())
     dispatch(fetchData(params.coinId));
     dispatch(fetchTwoWeekData(params.coinId));
+    fetchCoinData()
   }, [fetchData, fetchTwoWeekData]);
 
   useEffect(() => {
@@ -43,24 +65,26 @@ export default function CoinProfile() {
       getGraphData(prices);
     }
   }, [prices]);
-
-  const options = {
-    title: {
-      text: `Stock price of ${params.coinId}`,
-    },
-    axisY: {
-      title: "Price in USD",
-      prefix: "$",
-    },
-    data: [
-      {
-        type: "line",
-        xValueFormatString: "MMM YYYY",
-        yValueFormatString: "$#,##0.000",
-        dataPoints: points,
-      },
-    ],
-  };
+  console.log('here are the points', points)
+  // const options = {
+  //   title: {
+  //     text: `Stock price of ${params.coinId}`,
+  //   },
+  //   width: 600,
+  //   theme: 'dark2',
+  //   axisY: {
+  //     title: "Price in USD",
+  //     prefix: "$",
+  //   },
+  //   data: [
+  //     {
+  //       type: "line",
+  //       xValueFormatString: "MMM YYYY",
+  //       yValueFormatString: "$#,##0.000",
+  //       dataPoints: points,
+  //     },
+  //   ],
+  // };
 
   const handleClick = (e) => {
     if (e.target.id === "dev-data") {
@@ -83,108 +107,117 @@ export default function CoinProfile() {
   if (Object.keys(data).length === 0) return null;
  
   return (
-    <div style={{ paddingLeft: "50px", paddingRight: "50px", paddingTop: "10px" }}>
-      <Header />
-      <div style={{ display: "flex" }}>
-        <div>
-          {data.image && <img src={data.image.large} alt="" />}
-          <h1>
-            {data.id}({data.symbol})
-          </h1>
-        </div>
-        <div>
-          <h5>Market Cap Rank: {data.market_cap_rank}</h5>
-          <h5>Date Created: {data.genesis_date}</h5>
-          {data.market_data && (
+    <div className='coin-profile-root'>
+      <div className='coin-profile-sidebar'>
+        <div className='sidebar-profile-photo'>
+          {user && (
             <>
-              <h5>Total Supply: {data.market_data.total_supply}</h5>
-              <h5>Max Supply: {data.market_data.max_supply}</h5>
-              <h5>Circulating Supply: {data.market_data.circulating_supply}</h5>
+              <img style={{ width: '100px', height: '100px', borderRadius:'50%',  }} src={user.profilePhoto} />
+              <text style={{ color: 'white'}}>{user.name}</text>
             </>
           )}
+          
         </div>
-        {/* Developer stats from coin gecko */}
-        <div onClick={handleClick}>
-          {showDevData ? (
-            <button className="stats" id="dev-data">
-              Show Dev Data
-            </button>
-          ) : (
-            <div>
-              <button className="stats" id="dev-data">
-                Close Developer Data
-              </button>
-              <h5>Forks: {data.developer_data.forks}</h5>
-              <h5>Stars: {data.developer_data.stars}</h5>
-              <h5>Subscribers: {data.developer_data.subscribers}</h5>
-              <h5>Total Issues: {data.developer_data.total_issues}</h5>
-              <h5>Closed Issues: {data.developer_data.closed_issues}</h5>
-              <h5>Total Issues: {data.developer_data.total_issues}</h5>
-              <h5>
-                Pull Request Merged: {data.developer_data.pull_requests_merged}
-              </h5>
-              <h5>
-                Commit Count 4-weeks: {data.developer_data.commit_count_4_weeks}
-              </h5>
-            </div>
-          )}
+        <div className='sidebar-search'>
+          <Search/>
+          <div>
+            {/* {coinData && (
+              <>
+                <img src={coinData[0].image} style={{ width: '50px', height: '50px'}}/>
+                <h3 style={{color: 'white'}}>{coinData[0].id}</h3>
+                <h3 style={{ color: 'white' }}>{coinData[0].price_change_percentage_24h}</h3>
+              </>      
+            )}   */}
+          </div>
+          
+  
         </div>
-        <div onClick={handleClick}>
-          {showCommData ? (
-            <button className="stats" id="comm-data">
-              Show Comm Data
-            </button>
-          ) : (
-            <div>
-              <button className="stats" id="comm-data">
-                Close Community Data
-              </button>
-              <h5>Facebook Likes: {data.community_data.facebook_likes}</h5>
-              <h5>
-                Twitter Followers: {data.community_data.twitter_followers}
-              </h5>
-              <h5>
-                Reddit average posts 48h:
-                {data.community_data.reddit_average_posts_48h}
-              </h5>
-              <h5>
-                Reddit average comments 48h:
-                {data.community_data.reddit_average_comments_48h}
-              </h5>
-              <h5>
-                Reddit Subscribers:
-                {data.community_data.reddit_subscribers}
-              </h5>
-              <h5>
-                Telegram Channel User Count:{" "}
-                {data.community_data.telegram_channel_user_count}
-              </h5>
-            </div>
-          )}
-        </div>
-
-        {data.market_data && (
-          <>
-            <h2>{data.market_data.current_price.usd}</h2>
-            <h2>{data.market_data.price_change_percentage_24h}</h2>
-          </>
-        )}
+        
       </div>
-      <img
-        onClick={addToFavorites}
-        style={{ height: 30, paddingLeft: 35 }}
-        src={unfavorite}
-      />
-      {data.description && (
-        <p dangerouslySetInnerHTML={{ __html: data.description.en }}></p>
-      )}
-
-      <div>
-        <CanvasJSChart
-          options={options}
-          /* onRef = {ref => this.chart = ref} */
-        />
-      </div>
+      <div className='coin-profile-main'>
+        <div className='row-1'>
+          <div className='coin-id-card'>
+            {data.image && <img className='id-image' src={data.image.large} alt="" />}
+            <text>
+              {data.id}({data.symbol})
+            </text>
+          </div>
+          <div className='coin-hourly-change-card'>
+            {data.market_data && (
+              data.market_data.market_cap_change_percentage_24h > 0 ? (
+                <text style={{ color: '#05E502' }}>+{data.market_data.market_cap_change_percentage_24h}%</text>
+              ) : (
+                  <text style={{ color: 'red' }}>{data.market_data.market_cap_change_percentage_24h}%</text>
+              )
+              
+            )}
+          </div>
+          <div className='coin-market-data-card'>
+            {data.market_data && (
+              <>
+                {data.market_data.total_supply && (
+                  <text>Total Supply: {data.market_data.total_supply}</text>
+                )}
+                {data.market_data.max_supply && (
+                  <text>Max Supply: {data.market_data.max_supply}</text>
+                )}
+                
+                {data.market_data.circulating_supply && (
+                   <text>Circulating Supply: {parseInt(data.market_data.circulating_supply)}</text>
+                )}
+               
+              </>
+            )}
+          </div>
+          <div className='coin-dev-data-card'>
+            {data.developer_data && (
+              <>
+                <text className='dev-text'>Forks: {data.developer_data.forks}</text>
+                <text className='dev-text'>Stars: {data.developer_data.stars}</text>
+                <text className='dev-text'>Subscribers: {data.developer_data.subscribers}</text>
+                <text className='dev-text'>Total Issues: {data.developer_data.total_issues}</text>
+                <text className='dev-text'>Closed Issues: {data.developer_data.closed_issues}</text>
+                <text className='dev-text'>Total Issues: {data.developer_data.total_issues}</text>
+                <text className='dev-text'>
+                  Pull Request Merged: {data.developer_data.pull_requests_merged}
+                </text>
+                <text className='dev-text'>
+                  Commit Count 4-weeks: {data.developer_data.commit_count_4_weeks}
+                </text>
+              </>
+            )}
+          </div>
+        </div>
+        <div className='row-2'>
+          <div className='coin-desc-card'>
+            {data.description && (
+              <text dangerouslySetInnerHTML={{ __html: data.description.en }}></text>
+            )}
+          </div>
+          <div className='coin-graph-card'>
+            <ResponsiveContainer>
+              <AreaChart data={points}>
+                <defs>
+                  <linearGradient id="color" x1="0" y1="0" x2="0" y2="1" >
+                    <stop offset='0%' stopColor='#2451b7' stopOpacity={0.4} />
+                    <stop offset='75%' stopColor='#2451b7' stopOpacity={0.05} />
+                  </linearGradient>
+                </defs>
+               <Area dataKey="value" stroke="#2451b7" fill="url(#color)"/>
+               <XAxis dataKey="date" />
+               <YAxis 
+                  dataKey="value" 
+                  axisLine={false} 
+                  tickLine={false}
+                  tickCount={8}
+                  />
+               <Tooltip />
+               <CartesianGrid opacity={0.1} vertical={false}/>
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        </div>
     </div>
   );
 }
