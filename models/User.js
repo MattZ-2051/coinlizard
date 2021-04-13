@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({ // whenever a new user is created, it will use this model                          
     googleId: String,           // the googleId string will act as its unique id
     name: String,
+    profilePhoto: String
 });
 
 mongoose.model('users', userSchema);
