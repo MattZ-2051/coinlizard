@@ -110,38 +110,30 @@ export default function CoinProfile() {
     <div className='coin-profile-root'>
       <div className='coin-profile-sidebar'>
         <div className='sidebar-profile-photo'>
-          {user && (
+          {/* {user && (
             <>
               <img style={{ width: '100px', height: '100px', borderRadius:'50%',  }} src={user.profilePhoto} />
               <text style={{ color: 'white'}}>{user.name}</text>
             </>
-          )}
-          
+          )} */}
+          {data.image && <img className='id-image' src={data.image.large} alt="" />}
+              <text style={{color: 'white'}}>
+                {data.id}({data.symbol})
+              </text>
         </div>
         <div className='sidebar-search'>
           <Search/>
-          <div>
-            {/* {coinData && (
-              <>
-                <img src={coinData[0].image} style={{ width: '50px', height: '50px'}}/>
-                <h3 style={{color: 'white'}}>{coinData[0].id}</h3>
-                <h3 style={{ color: 'white' }}>{coinData[0].price_change_percentage_24h}</h3>
-              </>      
-            )}   */}
-          </div>
-          
-  
+        </div>
+        <div className='sidebar-coin-id'>
+          {/* <div className='coin-id-card'>
+            
+          </div> */}
         </div>
         
       </div>
       <div className='coin-profile-main'>
         <div className='row-1'>
-          <div className='coin-id-card'>
-            {data.image && <img className='id-image' src={data.image.large} alt="" />}
-            <text>
-              {data.id}({data.symbol})
-            </text>
-          </div>
+          
           <div className='coin-hourly-change-card'>
             {data.market_data && (
               data.market_data.market_cap_change_percentage_24h > 0 ? (
@@ -169,31 +161,13 @@ export default function CoinProfile() {
               </>
             )}
           </div>
-          <div className='coin-dev-data-card'>
-            {data.developer_data && (
-              <>
-                <text className='dev-text'>Forks: {data.developer_data.forks}</text>
-                <text className='dev-text'>Stars: {data.developer_data.stars}</text>
-                <text className='dev-text'>Subscribers: {data.developer_data.subscribers}</text>
-                <text className='dev-text'>Total Issues: {data.developer_data.total_issues}</text>
-                <text className='dev-text'>Closed Issues: {data.developer_data.closed_issues}</text>
-                <text className='dev-text'>Total Issues: {data.developer_data.total_issues}</text>
-                <text className='dev-text'>
-                  Pull Request Merged: {data.developer_data.pull_requests_merged}
-                </text>
-                <text className='dev-text'>
-                  Commit Count 4-weeks: {data.developer_data.commit_count_4_weeks}
-                </text>
-              </>
-            )}
-          </div>
         </div>
         <div className='row-2'>
-          <div className='coin-desc-card'>
+          {/* <div className='coin-desc-card'>
             {data.description && (
               <text dangerouslySetInnerHTML={{ __html: data.description.en }}></text>
             )}
-          </div>
+          </div> */}
           <div className='coin-graph-card'>
             <ResponsiveContainer>
               <AreaChart data={points}>

@@ -13,8 +13,7 @@
     background-color: #1C1E32;
     border-radius: 0px 25px 25px 0px;
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 .sidebar-profile-photo {
@@ -24,6 +23,12 @@
     align-items: center;
     flex-direction: column;
 
+}
+
+.sidebar-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .coin-profile-main {
     width: 100%;
@@ -135,7 +140,7 @@
 }
 
 .coin-graph-card {
-    grid-column: 2/3;
+   grid-column: 2/3;
    height: 350px;
 }
 
@@ -379,8 +384,9 @@
 @media screen and (max-width:1650px) {
     .coin-profile-root {
         width: 100%;
-        min-height: 100vh;
-        max-height: max-content;
+        /* min-height: 100vh;
+        max-height: max-content; */
+        height: 100vh;
         display: grid;
         grid-template-columns: 0.1fr 1fr;
         background-color: #191A26;
@@ -392,6 +398,7 @@
         padding-left: 40px;
         padding-right: 20px;
         padding-top: 20px;
+        overflow: auto;
     }
     .row-1 {
         grid-row: 1/2;
@@ -401,31 +408,34 @@
         max-width: 100%;
         grid-column-gap: 10px;
         place-items: center;
+        height: 500px;
     }
+
     .coin-id-card {
         grid-column: 1/2;
-        grid-row: 1/2;
-        height: 300px;
-        width: 60%;
+        /* height: 350px;
+        width: 70%; */
+        width: 300px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         background-color: white;
+        font-size: 35px;
+        font-weight: bold;
         border-radius: 25px;
         margin-left: 0px;
-        box-shadow: 0 0 15px 7px rgb(187, 186, 186),  /* inner white */
-        0 0 25px 15px rgb(156, 156, 156), /* middle magenta */
-        0 0 35px 23px rgb(117, 117, 117); /* outer cyan */
+        box-shadow: 0 0 15px 7px rgb(187, 186, 186), 
+        0 0 25px 15px rgb(156, 156, 156), 
+        0 0 35px 23px rgb(117, 117, 117);
     }
-
     .coin-hourly-change-card {
         grid-column: 2/3;
         grid-row: 1/2;
-        height: 300px;
-        width: 60%;
+        height: 170px;
+        width: 40%;
         display: flex;
-        font-size: 50px;
+        font-size: 30px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -441,8 +451,8 @@
         color: white;
         grid-column: 1/2;
         grid-row: 2/3;
-        height: 300px;
-        width: 60%;
+        height: 170px;
+        width: 40%;
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -451,15 +461,15 @@
         border-radius: 25px;
         box-shadow: 0 0 15px 7px #b43449,  /* inner white */
         0 0 25px 15px #802635, /* middle magenta */
-    0 0 35px 23px #42131b; /* outer cyan */
+        0 0 35px 23px #42131b; /* outer cyan */
     }
 
     .coin-dev-data-card {
         color: white;
         grid-column: 2/3;
         grid-row: 2/3;
-        height: 300px;
-        width: 60%;
+        height: 170px;
+        width: 40%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -472,7 +482,7 @@
     }
 
     .dev-text {
-        font-size: 20px;
+        font-size: 12px;
     }
     .row-2 {
         max-width: 100%;
@@ -497,7 +507,7 @@
     }
 
     .coin-graph-card {
-        min-height: 500px;
+        min-height: 350px;
         width: 100%;
         
         /* background-color: red; */
