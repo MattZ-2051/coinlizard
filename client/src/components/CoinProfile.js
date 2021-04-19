@@ -109,13 +109,7 @@ export default function CoinProfile() {
   return (
     <div className='coin-profile-root'>
       <div className='coin-profile-sidebar'>
-        <div className='sidebar-profile-photo'>
-          {/* {user && (
-            <>
-              <img style={{ width: '100px', height: '100px', borderRadius:'50%',  }} src={user.profilePhoto} />
-              <text style={{ color: 'white'}}>{user.name}</text>
-            </>
-          )} */}
+        <div className='sidebar-coin-id'>
           {data.image && <img className='id-image' src={data.image.large} alt="" />}
               <text style={{color: 'white'}}>
                 {data.id}({data.symbol})
@@ -124,16 +118,17 @@ export default function CoinProfile() {
         <div className='sidebar-search'>
           <Search/>
         </div>
-        <div className='sidebar-coin-id'>
-          {/* <div className='coin-id-card'>
-            
-          </div> */}
+        <div className='sidebar-profile-stats'>
+          {user && (
+            <>
+              <img style={{ width: '100px', height: '100px', borderRadius: '50%', }} src={user.profilePhoto} />
+            </>
+          )}
         </div>
         
       </div>
       <div className='coin-profile-main'>
-        <div className='row-1'>
-          
+        <div className='row-1'>  
           <div className='coin-hourly-change-card'>
             {data.market_data && (
               data.market_data.market_cap_change_percentage_24h > 0 ? (
@@ -148,20 +143,23 @@ export default function CoinProfile() {
             {data.market_data && (
               <>
                 {data.market_data.total_supply && (
-                  <text>Total Supply: {data.market_data.total_supply}</text>
+                  <text className='dev-text'>
+                    {`Total Supply: \n${data.market_data.total_supply}`}
+                  </text>
                 )}
                 {data.market_data.max_supply && (
-                  <text>Max Supply: {data.market_data.max_supply}</text>
+                  <text className='dev-text'>Max Supply: {data.market_data.max_supply}</text>
                 )}
                 
                 {data.market_data.circulating_supply && (
-                   <text>Circulating Supply: {parseInt(data.market_data.circulating_supply)}</text>
+                  <text className='dev-text'>Circulating Supply: {parseInt(data.market_data.circulating_supply)}</text>
                 )}
                
               </>
             )}
           </div>
         </div>
+        
         <div className='row-2'>
           {/* <div className='coin-desc-card'>
             {data.description && (

@@ -13,16 +13,15 @@
     background-color: #1C1E32;
     border-radius: 0px 25px 25px 0px;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 0.5fr 1fr;
 }
 
-.sidebar-profile-photo {
+.sidebar-coin-id {
     grid-row: 1/2;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
 }
 
 .sidebar-search {
@@ -30,6 +29,12 @@
     justify-content: center;
     align-items: center;
 }
+
+.sidebar-profile-stats {
+    display: flex;
+    justify-content: center;
+}
+
 .coin-profile-main {
     width: 100%;
     display: grid;
@@ -42,32 +47,15 @@
 .row-1 {
     grid-row: 1/2;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    max-width: 100%;
+    grid-template-columns: 1fr 1fr;
     place-items: center;
-}
-.coin-id-card {
-    grid-column: 1/2;
-    height: 350px;
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: white;
-    font-size: 35px;
-    font-weight: bold;
-    border-radius: 25px;
-    margin-left: 0px;
-    box-shadow: 0 0 15px 7px rgb(187, 186, 186), 
-    0 0 25px 15px rgb(156, 156, 156), 
-    0 0 35px 23px rgb(117, 117, 117);
+    max-width: 100%;
 }
 
 .coin-hourly-change-card {
-    grid-column: 2/3;
+    grid-column: 1/2;
     height: 350px;
-    width: 70%;
+    width: 350px;
     display: flex;
     font-size: 50px;
     justify-content: center;
@@ -82,28 +70,13 @@
 
 .coin-market-data-card {
     color: white;
-    grid-column: 3/4;
+    grid-column: 2/3;
     height: 350px;
-    width: max-content;
+     width: 350px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    flex-direction: column;
-    background-color: #d83e57;
-    border-radius: 25px;
-    box-shadow: 0 0 15px 7px #b43449,  /* inner white */
-    0 0 25px 15px #802635, /* middle magenta */
-   0 0 35px 23px #42131b; /* outer cyan */
-}
-
-.coin-dev-data-card {
-    color: white;
-    grid-column: 4/5;
-    height: 350px;
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    word-wrap: break-word;
     flex-direction: column;
     background-color: #d83e57;
     border-radius: 25px;
@@ -113,18 +86,16 @@
 }
 
 .dev-text {
-    font-size: 20px;
+    font-size: 25px;
 }
 .row-2 {
-    max-width: 100%;
     grid-row: 2/3;
     display: grid;
-    /* flex-direction: column;
-    max-height: min-content;
-    grid-auto-rows: minmax(min-content, max-content); */
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 0.2fr;
+    place-items: center;
 }
-.coin-desc-card {
+
+/* .coin-desc-card {
     grid-column: 1/2;
     height: 300px;
     overflow: scroll;
@@ -133,15 +104,13 @@
     align-items: center;
     background-color: white;
     border-radius: 25px;
-}
-
-.row-3 {
-    grid-row: 3/4;
-}
+} */
 
 .coin-graph-card {
-   grid-column: 2/3;
-   height: 350px;
+   grid-column: 1/2;
+   height: 450px;
+   width: 90%;
+   padding: 10px;
 }
 
 @media screen and (max-width:2200px) {
@@ -156,43 +125,20 @@
     .row-1 {
         grid-row: 1/2;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        max-width: 100%;
-        grid-column-gap: 10px;
+        grid-template-columns: 1fr 1fr;
         place-items: center;
-    }
-    .coin-id-card {
-        grid-column: 1/2;
-        height: 300px;
-        width: 70%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        font-size: 25px;
-        font-weight: bold;
-        background-color: white;
-        border-radius: 25px;
-        margin-left: 0px;
-        box-shadow: 0 0 15px 7px rgb(187, 186, 186),  /* inner white */
-        0 0 25px 15px rgb(156, 156, 156), /* middle magenta */
-        0 0 35px 23px rgb(117, 117, 117); /* outer cyan */
-    }
-
-    .id-image {
-        height:200px;
-        width: 200px;
+        max-width: 100%;
     }
 
     .coin-hourly-change-card {
-        grid-column: 2/3;
-        width: 70%;
+        grid-column: 1/2;
         height: 300px;
+        width: 300px;
         display: flex;
+        font-size: 50px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        font-size: 40px;
         background-color: #3081FF;
         border-radius: 25px;
         box-shadow: 0 0 15px 7px #2258af,  /* inner white */
@@ -202,28 +148,13 @@
 
     .coin-market-data-card {
         color: white;
-        grid-column: 3/4;
+        grid-column: 2/3;
         height: 300px;
-        width: 70%;
+        width: 300px;
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        flex-direction: column;
-        background-color: #d83e57;
-        border-radius: 25px;
-        box-shadow: 0 0 15px 7px #b43449,  /* inner white */
-        0 0 25px 15px #802635, /* middle magenta */
-    0 0 35px 23px #42131b; /* outer cyan */
-    }
-
-    .coin-dev-data-card {
-        color: white;
-        grid-column: 4/5;
-        height: 300px;
-        width: 70%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        word-wrap: break-word;
         flex-direction: column;
         background-color: #d83e57;
         border-radius: 25px;
@@ -233,15 +164,15 @@
     }
 
     .dev-text {
-        font-size: 15px;
+        font-size: 20px;
     }
     .row-2 {
-        max-width: 100%;
         grid-row: 2/3;
         display: grid;
-        grid-template-columns: 1fr 1fr; 
+        grid-template-rows: 1fr 0.2fr;
+        place-items: center;
     }
-    .coin-desc-card {
+    /* .coin-desc-card {
         grid-column: 1/2;
         min-height: 150px;
         height: min-content;
@@ -250,15 +181,13 @@
         align-items: center;
         background-color: white;
         border-radius: 25px;
-    }
+    } */
 
     .coin-graph-card {
-        grid-column: 2/3;
-        /* display: flex;
-        justify-content: center;
-        align-items: center; */
-        width: 100%;
-        height: 300px;
+        grid-column: 1/2;
+        height: 450px;
+        width: 90%;
+        padding: 10px;
     }   
 }
 
@@ -274,40 +203,21 @@
     .row-1 {
         grid-row: 1/2;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        max-width: 100%;
-        grid-column-gap: 10px;
+        grid-template-columns: 1fr 1fr;
         place-items: center;
-    }
-    .coin-id-card {
-        grid-column: 1/2;
-        height: 250px;
-        width: 70%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background-color: white;
-        border-radius: 25px;
-        margin-left: 0px;
-        box-shadow: 0 0 15px 7px rgb(187, 186, 186),  /* inner white */
-        0 0 25px 15px rgb(156, 156, 156), /* middle magenta */
-        0 0 35px 23px rgb(117, 117, 117); /* outer cyan */
+        max-width: 100%;
     }
 
-    .id-image {
-        height: 150px;
-        width: 150px;
-    }
     .coin-hourly-change-card {
-        grid-column: 2/3;
-        width: 70%;
+        grid-column: 1/2;
         height: 250px;
+        width: 250px;
+        min-width: max-content;
         display: flex;
+        font-size: 40px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        font-size: 30px;
         background-color: #3081FF;
         border-radius: 25px;
         box-shadow: 0 0 15px 7px #2258af,  /* inner white */
@@ -317,28 +227,13 @@
 
     .coin-market-data-card {
         color: white;
-        grid-column: 3/4;
+        grid-column: 2/3;
         height: 250px;
-        width: 70%;
+        width: 250px;
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        flex-direction: column;
-        background-color: #d83e57;
-        border-radius: 25px;
-        box-shadow: 0 0 15px 7px #b43449,  /* inner white */
-        0 0 25px 15px #802635, /* middle magenta */
-    0 0 35px 23px #42131b; /* outer cyan */
-    }
-
-    .coin-dev-data-card {
-        color: white;
-        grid-column: 4/5;
-        height: 250px;
-        width: 70%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        word-wrap: break-word;
         flex-direction: column;
         background-color: #d83e57;
         border-radius: 25px;
@@ -348,17 +243,16 @@
     }
 
     .dev-text {
-        font-size: 13px;
+        font-size: 18px;
     }
     .row-2 {
-        max-width: 100%;
         grid-row: 2/3;
-        display: flex;
-        flex-direction: column;
-        max-height: min-content;
-        grid-auto-rows: minmax(min-content, max-content);
+        display: grid;
+        grid-template-rows: 1fr 0.2fr;
+        place-items: center;
     }
-    .coin-desc-card {
+    /* .coin-desc-card {
+        grid-column: 1/2;
         min-height: 150px;
         height: min-content;
         width: 100%;
@@ -366,76 +260,40 @@
         align-items: center;
         background-color: white;
         border-radius: 25px;
-    }
-
-    .row-3 {
-        grid-row: 3/4;
-    }
+    } */
 
     .coin-graph-card {
-        min-height: 500px;
-        width: 100%;
-        
-        /* background-color: red; */
-        border-radius: 25px;
-    }
+        grid-column: 1/2;
+        height: 450px;
+        width: 90%;
+        padding: 10px;
+    }   
 }
 
 @media screen and (max-width:1650px) {
     .coin-profile-root {
         width: 100%;
-        /* min-height: 100vh;
-        max-height: max-content; */
-        height: 100vh;
+        min-height: 100vh;
+        max-height: max-content;
         display: grid;
         grid-template-columns: 0.1fr 1fr;
         background-color: #191A26;
-    }
-    .coin-profile-main {
-        width: 100%;
-        display: grid;
-        grid-template-rows: 1fr 1fr;
-        padding-left: 40px;
-        padding-right: 20px;
-        padding-top: 20px;
-        overflow: auto;
     }
     .row-1 {
         grid-row: 1/2;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        max-width: 100%;
-        grid-column-gap: 10px;
         place-items: center;
-        height: 500px;
+        max-width: 100%;
     }
 
-    .coin-id-card {
-        grid-column: 1/2;
-        /* height: 350px;
-        width: 70%; */
-        width: 300px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background-color: white;
-        font-size: 35px;
-        font-weight: bold;
-        border-radius: 25px;
-        margin-left: 0px;
-        box-shadow: 0 0 15px 7px rgb(187, 186, 186), 
-        0 0 25px 15px rgb(156, 156, 156), 
-        0 0 35px 23px rgb(117, 117, 117);
-    }
     .coin-hourly-change-card {
-        grid-column: 2/3;
-        grid-row: 1/2;
-        height: 170px;
-        width: 40%;
+        grid-column: 1/2;
+        height: 250px;
+        width: 250px;
+        min-width: max-content;
         display: flex;
-        font-size: 30px;
+        font-size: 40px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -446,33 +304,15 @@
         0 0 35px 23px #0a182e; /* outer cyan */
     }
 
-    
     .coin-market-data-card {
         color: white;
-        grid-column: 1/2;
-        grid-row: 2/3;
-        height: 170px;
-        width: 40%;
+        grid-column: 2/3;
+        height: 250px;
+        width: 250px;
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        flex-direction: column;
-        background-color: #d83e57;
-        border-radius: 25px;
-        box-shadow: 0 0 15px 7px #b43449,  /* inner white */
-        0 0 25px 15px #802635, /* middle magenta */
-        0 0 35px 23px #42131b; /* outer cyan */
-    }
-
-    .coin-dev-data-card {
-        color: white;
-        grid-column: 2/3;
-        grid-row: 2/3;
-        height: 170px;
-        width: 40%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        word-wrap: break-word;
         flex-direction: column;
         background-color: #d83e57;
         border-radius: 25px;
@@ -482,17 +322,16 @@
     }
 
     .dev-text {
-        font-size: 12px;
+        font-size: 18px;
     }
     .row-2 {
-        max-width: 100%;
         grid-row: 2/3;
-        display: flex;
-        flex-direction: column;
-        max-height: min-content;
-        grid-auto-rows: minmax(min-content, max-content);
+        display: grid;
+        grid-template-rows: 1fr 0.2fr;
+        place-items: center;
     }
-    .coin-desc-card {
+    /* .coin-desc-card {
+        grid-column: 1/2;
         min-height: 150px;
         height: min-content;
         width: 100%;
@@ -500,17 +339,12 @@
         align-items: center;
         background-color: white;
         border-radius: 25px;
-    }
-
-    .row-3 {
-        grid-row: 3/4;
-    }
+    } */
 
     .coin-graph-card {
-        min-height: 350px;
-        width: 100%;
-        
-        /* background-color: red; */
-        border-radius: 25px;
-    }
+        grid-column: 1/2;
+        height: 450px;
+        width: 90%;
+        padding: 10px;
+    }   
 }
