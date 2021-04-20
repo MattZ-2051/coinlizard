@@ -109,30 +109,35 @@ export default function CoinProfile() {
         <div className='sidebar-search'>
           <Search/>
         </div>
-        <div className='sidebar-profile-photo'>
+        {user ? (
           <>
-            {user && (
+            <div className='sidebar-profile-photo'>
               <>
-                <img style={{ width: '100px', height: '100px', borderRadius: '50%', }} src={user.profilePhoto} />
+                {user && (
+                  <>
+                    <img style={{ width: '100px', height: '100px', borderRadius: '50%', }} src={user.profilePhoto} />
+                  </>
+                )}
               </>
-            )}
-          </>
-        </div>
-        <div className='sidebar-favorite-stats'>
-          {coinData ? (
-            coinData.map((coin) => {
-              return (
-                <SidebarFavorite
-                  coin={coin}
-                  key={coin.id}
-                  isFavorited={isFavorited(favorites, coin)}
-                />
-              );
-            })
-          ) : (
-            <h1>Loading...</h1>
-          )}
-        </div>
+            </div>
+            <div className='sidebar-favorite-stats'>
+              {coinData ? (
+                coinData.map((coin) => {
+                  return (
+                    <SidebarFavorite
+                      coin={coin}
+                      key={coin.id}
+                      isFavorited={isFavorited(favorites, coin)}
+                    />
+                  );
+                })
+                ) : (
+                  <h1>Loading...</h1>
+                )}
+            </div>
+            </>
+        ) : (null)}
+        
         
       </div>
       <div className='coin-profile-main'>
