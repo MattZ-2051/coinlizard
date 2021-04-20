@@ -1,0 +1,23 @@
+.sidebar-favorite-root {
+    display: grid;
+    grid-column: 1fr 1fr;
+}
+
+.symbol {
+    grid-column: 1/2;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.photo {
+    height: 40px;
+    width: 40px;
+}
+
+.price-change {
+    grid-column: 2/3;
+    display: flex;
+    justify-content: center;
+      padding-top: 10px;
+}
