@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
 import { fetchUser } from '../actions/userActions.js';
-import { addFavorite } from "../actions/favoriteActions";
+import { addFavorite, getFavorites, removeFavorites } from "../actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
 import { ResponsiveContainer, AreaChart, XAxis, YAxis, Area, Tooltip, CartesianGrid } from 'recharts';
 import CoinGecko from "coingecko-api";
 import unfavorite from "../images/unfavorite.png";
 import CanvasJSReact from "../canvasjs.react";
 import Search from './Search';
+import SidebarFavorite from './SidebarFavorite';
 import "../styles/CoinProfile.css";
 import Header from "./Header.js";
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -26,9 +27,10 @@ export default function CoinProfile() {
   const data = useSelector((state) => state.coinReducer);
   const user = useSelector((state) => state.authReducer);
   const prices = useSelector((state) => state.coinReducer.prices);
+  const favorites = useSelector(state => state.favoriteReducer);
 
   function getGraphData(array) {
-    console.log('//////', array[0])
+
     for (let i = 0; i < array.length; i++) {
       
       if (i % 24 === 0) {
@@ -48,43 +50,32 @@ export default function CoinProfile() {
         order: CoinGecko.ORDER.MARKET_CAP_DESC,
       };
       const result = await coinGeckoClient.coins.markets({ params });
-      for (let i = 0; i < 5; i++) {
-        coinData.push(result.data[i])
-      }
+      setCoinData(result.data);
     }
 
-  
     dispatch(fetchUser())
     dispatch(fetchData(params.coinId));
     dispatch(fetchTwoWeekData(params.coinId));
+    dispatch(getFavorites(user._id))
     fetchCoinData()
   }, [fetchData, fetchTwoWeekData]);
 
-  useEffect(() => {
-    if (prices) {
-      getGraphData(prices);
+    useEffect(() => {
+      if (prices) {
+        getGraphData(prices);
+      }
+    }, [prices]);
+  
+    console.log(coinData)
+  const isFavorited = (array, coin) => {
+    for (let i = 0; i < array.length; i++) {
+      let obj = array[i];
+      if (obj[Object.keys(obj)[1]] === coin.id) {
+        return true;
+      }
     }
-  }, [prices]);
-  console.log('here are the points', points)
-  // const options = {
-  //   title: {
-  //     text: `Stock price of ${params.coinId}`,
-  //   },
-  //   width: 600,
-  //   theme: 'dark2',
-  //   axisY: {
-  //     title: "Price in USD",
-  //     prefix: "$",
-  //   },
-  //   data: [
-  //     {
-  //       type: "line",
-  //       xValueFormatString: "MMM YYYY",
-  //       yValueFormatString: "$#,##0.000",
-  //       dataPoints: points,
-  //     },
-  //   ],
-  // };
+    return false;
+  };
 
   const handleClick = (e) => {
     if (e.target.id === "dev-data") {
@@ -118,11 +109,28 @@ export default function CoinProfile() {
         <div className='sidebar-search'>
           <Search/>
         </div>
-        <div className='sidebar-profile-stats'>
-          {user && (
-            <>
-              <img style={{ width: '100px', height: '100px', borderRadius: '50%', }} src={user.profilePhoto} />
-            </>
+        <div className='sidebar-profile-photo'>
+          <>
+            {user && (
+              <>
+                <img style={{ width: '100px', height: '100px', borderRadius: '50%', }} src={user.profilePhoto} />
+              </>
+            )}
+          </>
+        </div>
+        <div className='sidebar-favorite-stats'>
+          {coinData ? (
+            coinData.map((coin) => {
+              return (
+                <SidebarFavorite
+                  coin={coin}
+                  key={coin.id}
+                  isFavorited={isFavorited(favorites, coin)}
+                />
+              );
+            })
+          ) : (
+            <h1>Loading...</h1>
           )}
         </div>
         
@@ -176,12 +184,16 @@ export default function CoinProfile() {
                   </linearGradient>
                 </defs>
                <Area dataKey="value" stroke="#2451b7" fill="url(#color)"/>
-               <XAxis dataKey="date" />
+               <XAxis dataKey="date" 
+                axisLine={false}
+                tickLine={false}
+               />
                <YAxis 
                   dataKey="value" 
                   axisLine={false} 
                   tickLine={false}
                   tickCount={8}
+                  // tickFormatter={number => `$${number.toFixed(2)}`}
                   />
                <Tooltip />
                <CartesianGrid opacity={0.1} vertical={false}/>
