@@ -15,6 +15,7 @@ Coin Lizard is a MERN stack app which means that it utilizes JavaScript and Reac
 
 To display the relevant information that corresponds to a specific crypto currency, a get request is made to the Coin Gecko API. This is done by setting up a Redux action called fetchData() that takes in an *id* as a parameter. The *id* in this case is the name of the crypto.
 
+![CoinProfile](./client/src/images/coinProfile.jpg)
 ```JavaScript
 export const fetchData = (id) => async (dispatch) => {
   const res = await coinGeckoClient.coins.fetch(id, {});
