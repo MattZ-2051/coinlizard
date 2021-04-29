@@ -92,10 +92,10 @@
     color: white;
     grid-column: 2/3;
     height: 350px;
-     width: 350px;
+    width: 350px;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     word-wrap: break-word;
     flex-direction: column;
     background-color: #d83e57;

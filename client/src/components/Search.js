@@ -41,7 +41,7 @@ const Search = () => {
     }
     
     return (
-        <div style={{width: '100%'}}>
+        <div style={{width: '85%'}}>
             <ReactSearchAutocomplete
                 items={coinData}
                 onSearch={handleOnSearch}
