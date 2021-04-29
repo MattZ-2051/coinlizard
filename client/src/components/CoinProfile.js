@@ -152,34 +152,43 @@ export default function CoinProfile() {
               
             )}
           </div>
-          <div className='coin-market-data-card'>
-            {data.market_data && (
-              <>
-                {data.market_data.total_supply && (
-                  <text className='dev-text'>
-                    {`Total Supply: \n${data.market_data.total_supply}`}
-                  </text>
-                )}
-                {data.market_data.max_supply && (
-                  <text className='dev-text'>Max Supply: {data.market_data.max_supply}</text>
-                )}
-                
-                {data.market_data.circulating_supply && (
-                  <text className='dev-text'>Circulating Supply: {parseInt(data.market_data.circulating_supply)}</text>
-                )}
-               
-              </>
+          {data.market_data && (
+            <div className='market-data-cards'>
+              {data.market_data.total_supply ? (
+                <div className='coin-market-data-card-1'>
+                  {data.market_data.total_supply && (
+                    <text className='dev-text'>
+                      {`Total Supply: \n${data.market_data.total_supply}`}
+                    </text>
+                  )}
+                </div>
+              ) : (null)}
+              {data.market_data.circulating_supply ? (
+                <div className='coin-market-data-card-2'>
+                  {data.market_data.circulating_supply && (
+                    <text className='dev-text'>Circulating Supply: {parseInt(data.market_data.circulating_supply)}</text>
+                  )}
+              </div>
+              ) : (null)}
+                {data.market_data.max_supply ? (
+                  <div className='coin-market-data-card-3'>        
+                    {data.market_data.max_supply && (
+                      <text className='dev-text'>Max Supply: {data.market_data.max_supply}</text>
+                    )}
+                  </div>
+                ) : (null)}
+            </div>
             )}
-          </div>
-        </div>
-        
+        </div>   
         <div className='row-2'>
           {/* <div className='coin-desc-card'>
             {data.description && (
               <text dangerouslySetInnerHTML={{ __html: data.description.en }}></text>
             )}
           </div> */}
+         
           <div className='coin-graph-card'>
+            <h1 style={{display: 'flex', justifyContent:'center', color: 'white'}}>Weekly Trend</h1>
             <ResponsiveContainer>
               <AreaChart data={points}>
                 <defs>
