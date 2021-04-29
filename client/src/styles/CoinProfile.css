@@ -88,25 +88,71 @@
     0 0 35px 23px #0a182e; /* outer cyan */
 }
 
-.coin-market-data-card {
-    color: white;
+.market-data-cards {
+    padding: 25px 0px 25px 0px;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
     grid-column: 2/3;
-    height: 350px;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+.coin-market-data-card-1 {
+    color: white;
+    grid-row: 1/2;
+    height: 90px;
     width: 350px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     word-wrap: break-word;
     flex-direction: column;
-    background-color: #d83e57;
+    background-color: #2A9D8F;
     border-radius: 25px;
-    box-shadow: 0 0 15px 7px #b43449,  /* inner white */
-    0 0 25px 15px #802635, /* middle magenta */
-    0 0 35px 23px #42131b; /* outer cyan */
+    box-shadow: 0 0 8px 3.5px #2A9D8F,  
+    0 0 12px 7px #1d6d64,
+    0 0 18px 11px #16524b; 
+}
+
+.coin-market-data-card-2 {
+    color: white;
+   
+    grid-row: 2/3;
+    height: 90px;
+    width: 350px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    word-wrap: break-word;
+    flex-direction: column;
+    background-color: #DF2935;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 3.5px #DF2935,  
+    0 0 12px 7px #a11e26,
+    0 0 18px 11px #661319; 
+}
+
+.coin-market-data-card-3 {
+    color: white;
+ 
+    grid-row: 3/4;
+    height: 90px;
+    width: 350px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    word-wrap: break-word;
+    flex-direction: column;
+    background-color: #074674;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 3.5px #074674,  
+    0 0 12px 7px #032944,
+    0 0 18px 11px #021a2b; 
 }
 
 .dev-text {
-    font-size: 25px;
+    font-size: 20px;
 }
 .row-2 {
     grid-row: 2/3;
@@ -166,25 +212,70 @@
         0 0 35px 23px #0a182e; /* outer cyan */
     }
 
-    .coin-market-data-card {
-        color: white;
+    .market-data-cards {
+        padding: 50px 0px 50px 0px;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        align-items: center;
         grid-column: 2/3;
-        height: 300px;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    .coin-market-data-card-1 {
+        color: white;
+        grid-row: 1/2;
+        height: 70px;
         width: 300px;
         display: flex;
-        justify-content: center;
-        align-items: flex-start;
+        justify-content: space-evenly;
+        align-items: center;
         word-wrap: break-word;
         flex-direction: column;
-        background-color: #d83e57;
+        background-color: #2A9D8F;
         border-radius: 25px;
-        box-shadow: 0 0 15px 7px #b43449,  /* inner white */
-        0 0 25px 15px #802635, /* middle magenta */
-        0 0 35px 23px #42131b; /* outer cyan */
+        box-shadow: 0 0 8px 3.5px #2A9D8F,  
+        0 0 12px 7px #1d6d64,
+        0 0 18px 11px #16524b; 
+    }
+
+    .coin-market-data-card-2 {
+        color: white;
+    
+        grid-row: 2/3;
+        height: 70px;
+        width: 300px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        word-wrap: break-word;
+        flex-direction: column;
+        background-color: #DF2935;
+        border-radius: 25px;
+        box-shadow: 0 0 8px 3.5px #DF2935,  
+        0 0 12px 7px #a11e26,
+        0 0 18px 11px #661319; 
+    }
+
+    .coin-market-data-card-3 {
+        color: white;
+    
+        grid-row: 3/4;
+        height: 70px;
+        width: 300px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        word-wrap: break-word;
+        flex-direction: column;
+        background-color: #074674;
+        border-radius: 25px;
+        box-shadow: 0 0 8px 3.5px #074674,  
+        0 0 12px 7px #032944,
+        0 0 18px 11px #021a2b; 
     }
 
     .dev-text {
-        font-size: 20px;
+        font-size: 17px;
     }
     .row-2 {
         grid-row: 2/3;
@@ -245,25 +336,70 @@
         0 0 35px 23px #0a182e; /* outer cyan */
     }
 
-    .coin-market-data-card {
-        color: white;
+    .market-data-cards {
+        padding: 70px 0px 70px 0px;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        align-items: center;
         grid-column: 2/3;
-        height: 250px;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    .coin-market-data-card-1 {
+        color: white;
+        grid-row: 1/2;
+        height: 55px;
         width: 250px;
         display: flex;
-        justify-content: center;
-        align-items: flex-start;
+        justify-content: space-evenly;
+        align-items: center;
         word-wrap: break-word;
         flex-direction: column;
-        background-color: #d83e57;
+        background-color: #2A9D8F;
         border-radius: 25px;
-        box-shadow: 0 0 15px 7px #b43449,  /* inner white */
-        0 0 25px 15px #802635, /* middle magenta */
-        0 0 35px 23px #42131b; /* outer cyan */
+        box-shadow: 0 0 8px 3.5px #2A9D8F,  
+        0 0 12px 7px #1d6d64,
+        0 0 18px 11px #16524b; 
+    }
+
+    .coin-market-data-card-2 {
+        color: white;
+    
+        grid-row: 2/3;
+        height: 55px;
+        width: 250px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        word-wrap: break-word;
+        flex-direction: column;
+        background-color: #DF2935;
+        border-radius: 25px;
+        box-shadow: 0 0 8px 3.5px #DF2935,  
+        0 0 12px 7px #a11e26,
+        0 0 18px 11px #661319; 
+    }
+
+    .coin-market-data-card-3 {
+        color: white;
+    
+        grid-row: 3/4;
+        height: 55px;
+        width: 250px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        word-wrap: break-word;
+        flex-direction: column;
+        background-color: #074674;
+        border-radius: 25px;
+        box-shadow: 0 0 8px 3.5px #074674,  
+        0 0 12px 7px #032944,
+        0 0 18px 11px #021a2b; 
     }
 
     .dev-text {
-        font-size: 18px;
+        font-size: 15px;
     }
     .row-2 {
         grid-row: 2/3;
@@ -341,9 +477,6 @@
         0 0 35px 23px #42131b; /* outer cyan */
     }
 
-    .dev-text {
-        font-size: 18px;
-    }
     .row-2 {
         grid-row: 2/3;
         display: grid;
