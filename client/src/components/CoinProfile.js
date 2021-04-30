@@ -207,7 +207,6 @@ export default function CoinProfile() {
                   axisLine={false} 
                   tickLine={false}
                   tickCount={8}
-                  // tickFormatter={number => `$${number.toFixed(2)}`}
                   />
                <Tooltip />
                <CartesianGrid opacity={0.1} vertical={false}/>
