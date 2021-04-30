@@ -5,6 +5,7 @@ const Favorite = mongoose.model('favorites')
 module.exports = app => {
     app.post('/api/favorites', (req, res) => {
         const { coinName } = req.body;
+        console.log(req.body)
         Favorite.findOne({ coinName: coinName }) // queries db for coinName matching the coinName in the req body
                 .then((existingFavorite) => {
                     if (existingFavorite) { // means user already favorited coin ie do nothing
@@ -15,6 +16,7 @@ module.exports = app => {
                             _user: req.user.id
                                 })
                             .save() //.save() saves data to the database
+                            console.log('favorited')
                     }
                 })
     });

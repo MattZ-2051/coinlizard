@@ -42,10 +42,8 @@ export default function Crypto({ coin, isFavorited }) {
     };
 
     if (isFavorited === false) {
-      //setIsFavorite(true);
       dispatch(addFavorite(form));
     } else {
-      //setIsFavorite(false);
       dispatch(removeFavorite(coin.id, form));
     }
   };

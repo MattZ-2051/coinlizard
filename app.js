@@ -12,6 +12,8 @@ require('./services/passport.js');
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded());
 // // parse application/x-www-form-urlencoded
 // app.use(bodyParser.urlencoded({ extended: false }))
  
@@ -32,4 +34,7 @@ require('./routes/authRoutes')(app);
 require('./routes/favoritesRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+// app.listen(PORT);
+app.listen(PORT, () => {
+    console.log("App is running on port " + PORT);
+});
