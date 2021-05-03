@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "npx nodemon app.js"
+   
   },
   "repository": {
     "type": "git",
