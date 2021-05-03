@@ -21,7 +21,7 @@ passport.use(
         {
             clientID: keys.googleClientID,
             clientSecret: keys.googleClientSecret,
-            callbackURL: '/auth/google/callback'
+            callbackURL: 'https://coin-lizard.herokuapp.com/auth/google/callback'
         },
         (accessToken, refreshToken, profile, done) => {
             const name = profile.name.givenName + ' ' + profile.name.familyName
