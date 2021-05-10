@@ -1,7 +1,18 @@
-.table {
-    /* background-color: #191A26; */
+.home-root {
+    height: 100vh;
+    width: 100%;
+    background-color: cadetblue;
+    display: grid;
+    grid-template-columns: 0.2fr 1fr 0.2fr;
 }
 
-.className {
-    color:white
+.home-col-2 {
+    display: grid;
+    
+}
+
+.coin-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    place-items: center;
 }
