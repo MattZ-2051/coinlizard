@@ -13,7 +13,7 @@
     background-color: #1C1E32;
     border-radius: 0px 25px 25px 0px;
     display: grid;
-    grid-template-rows: 1fr 0.5fr 0.5fr 1fr;
+    grid-template-rows: 1fr 0.2fr 0.3fr 0.4fr 1fr;
 }
 
 .sidebar-coin-id {
@@ -24,21 +24,30 @@
     flex-direction: column;
 }
 
-.sidebar-search {
+.home-and-favorited{
+    grid-row: 2/3;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: space-evenly;
+    align-items: center;
+
 }
 
-.sidebar-profile-photo {
+.sidebar-search {
     grid-row: 3/4;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.sidebar-favorite-stats {
+.sidebar-profile-photo {
     grid-row: 4/5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-favorite-stats {
+    grid-row: 5/6;
     display: grid;
     grid-column: 1fr 1fr;
     max-height: 400px;

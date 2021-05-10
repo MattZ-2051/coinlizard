@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
 import { fetchUser } from '../actions/userActions.js';
-import { addFavorite, getFavorites, removeFavorites } from "../actions/favoriteActions";
+import { addFavorite, getFavorites, removeFavorite } from "../actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
 import { ResponsiveContainer, AreaChart, XAxis, YAxis, Area, Tooltip, CartesianGrid } from 'recharts';
 import CoinGecko from "coingecko-api";
 import unfavorite from "../images/unfavorite.png";
+import favorite from "../images/favorite.png";
 import CanvasJSReact from "../canvasjs.react";
 import Search from './Search';
 import SidebarFavorite from './SidebarFavorite';
 import "../styles/CoinProfile.css";
+import home from '../images/home.png';
 import Header from "./Header.js";
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -22,6 +24,7 @@ export default function CoinProfile() {
   const [showDevData, setShowDevData] = useState(true);
   const [showCommData, setShowCommData] = useState(true);
   const [coinData, setCoinData] = useState([]);
+  const [favorited, setFavorited] = useState(false);
   const params = useParams();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.coinReducer);
@@ -44,7 +47,6 @@ export default function CoinProfile() {
   }
 
   useEffect(() => {
-    
     async function fetchCoinData() {
       const params = {
         order: CoinGecko.ORDER.MARKET_CAP_DESC,
@@ -52,7 +54,6 @@ export default function CoinProfile() {
       const result = await coinGeckoClient.coins.markets({ params });
       setCoinData(result.data);
     }
-
     dispatch(fetchUser())
     dispatch(fetchData(params.coinId));
     dispatch(fetchTwoWeekData(params.coinId));
@@ -60,13 +61,24 @@ export default function CoinProfile() {
     fetchCoinData()
   }, [fetchData, fetchTwoWeekData]);
 
-    useEffect(() => {
-      if (prices) {
-        getGraphData(prices);
+  useEffect(() => {
+    if (prices) {
+      getGraphData(prices);
+    }
+
+    async function isFavorites(array, coin) {
+      for (let i = 0; i < array.length; i++) {
+        let obj = array[i];  
+        if (obj[Object.keys(obj)[1]] === coin) {
+          setFavorited(true)
+          return
+        }
       }
-    }, [prices]);
+      setFavorited(false);
+    }
+    isFavorites(favorites, params.coinId);
+  }, [prices]);
   
-    console.log(coinData)
   const isFavorited = (array, coin) => {
     for (let i = 0; i < array.length; i++) {
       let obj = array[i];
@@ -77,26 +89,43 @@ export default function CoinProfile() {
     return false;
   };
 
-  const handleClick = (e) => {
-    if (e.target.id === "dev-data") {
-      setShowDevData(!showDevData);
-    } else if (e.target.id === "comm-data") {
-      setShowCommData(!showCommData);
-    }
-  };
+  // const handleClick = (e) => {
+  //   if (e.target.id === "dev-data") {
+  //     setShowDevData(!showDevData);
+  //   } else if (e.target.id === "comm-data") {
+  //     setShowCommData(!showCommData);
+  //   }
+  // };
 
-  const addToFavorites = (e) => {
-    e.preventDefault();
+  // const addToFavorites = (e) => {
+  //   e.preventDefault();
 
+  //   const form = {
+  //     coinName: data.id,
+  //     _user: user._id,
+  //   };
+  //   dispatch(addFavorite(form));
+  // };
+
+  const handleFavorites = (e) => {
     const form = {
       coinName: data.id,
       _user: user._id,
     };
-    dispatch(addFavorite(form));
+
+    if (favorited === false) {
+      console.log('favorited')
+      dispatch(addFavorite(form));
+      window.location.reload(false);
+    } else {
+      console.log('unfavorited')
+      dispatch(removeFavorite(data.id, form));
+      window.location.reload(false);
+    }
   };
 
   if (Object.keys(data).length === 0) return null;
- 
+
   return (
     <div className='coin-profile-root'>
       <div className='coin-profile-sidebar'>
@@ -105,6 +134,14 @@ export default function CoinProfile() {
               <text style={{color: 'white'}}>
                 {data.id}({data.symbol})
               </text>
+        </div>
+        <div className='home-and-favorited'>
+          <img src={home} />
+          {favorited ? (
+            <img onClick={handleFavorites} src={favorite} />
+          ) : (
+              <img onClick={handleFavorites} src={unfavorite} />
+          )}
         </div>
         <div className='sidebar-search'>
           <Search/>

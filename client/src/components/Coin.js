@@ -50,43 +50,50 @@ export default function Crypto({ coin, isFavorited }) {
   };
 
   return (
-    <tr className="coin-root" style={{ fontWeight: "bold", borderColor: 'blue' }} key={coin.id}>
-      <td>
-        <img
-          src={coin.image}
-          style={{ width: 25, height: 25, marginRight: 10 }}
-        />
-        <Link to={`/coin-profile/${coin.id}`} style={{ color: "#000000" }}>
-          {coin.symbol.toUpperCase()}
-        </Link>
-      </td>
-      <td style={{ fontWeight: "bold" }}>
-        <span
-          className={
-            coin.price_change_percentage_24h > 0
-              ? "text-success"
-              : "text-danger"
-          }
-        >
-          {formatPercent(coin.price_change_percentage_24h)}
-        </span>
-      </td>
-      <td style={{ fontWeight: "bold" }}>
-        {formatDollar(coin.current_price, 20)}
-      </td>
-      <td style={{ fontWeight: "bold" }}>
-        {formatDollar(coin.market_cap, 12)}
-      </td>
-      {user && (
-        <td onClick={handleFavorites}>
-          {isFavorited ? (
-            <img style={{ height: 30, paddingLeft: 35 }} src={favorite} />
-          ) : (
-            <img style={{ height: 30, paddingLeft: 35 }} src={unfavorite} />
-          )}  
-        </td>
-      )}
+    <>
+    {isFavorited ? (
+      <img style={{ height: 30, paddingLeft: 35 }} src={favorite} />
+    ) : (
+      <img style={{ height: 30, paddingLeft: 35 }} src={unfavorite} />
+    )}  
+    </>
+    )
+    // <tr className="coin-root" style={{ fontWeight: "bold", borderColor: 'blue' }} key={coin.id}>
+    // <td>
+    // <img
+    //       src={coin.image}
+    //       style={{ width: 25, height: 25, marginRight: 10 }}
+    //     />
+    //     <Link to={`/coin-profile/${coin.id}`} style={{ color: "#000000" }}>
+    //       {coin.symbol.toUpperCase()}
+    //     </Link>
+    //   </td>
+    //   <td style={{ fontWeight: "bold" }}>
+    //     <span
+    //       className={
+    //         coin.price_change_percentage_24h > 0
+    //           ? "text-success"
+    //           : "text-danger"
+    //       }
+    //     >
+    //       {formatPercent(coin.price_change_percentage_24h)}
+    //     </span>
+    //   </td>
+    //   <td style={{ fontWeight: "bold" }}>
+    //     {formatDollar(coin.current_price, 20)}
+    //   </td>
+    //   <td style={{ fontWeight: "bold" }}>
+    //     {formatDollar(coin.market_cap, 12)}
+    //   </td>
+    //   {user && (
+    //     <td onClick={handleFavorites}>
+    //       {isFavorited ? (
+    //         <img style={{ height: 30, paddingLeft: 35 }} src={favorite} />
+    //       ) : (
+    //         <img style={{ height: 30, paddingLeft: 35 }} src={unfavorite} />
+    //       )}  
+    //     </td>
+    //   )}
       
-    </tr>
-  );
+    // </tr>
 }
