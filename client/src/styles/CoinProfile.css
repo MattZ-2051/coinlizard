@@ -112,12 +112,12 @@
     border-radius: 25px;
     box-shadow: 0 0 8px 3.5px #2A9D8F,  
     0 0 12px 7px #1d6d64,
-    0 0 18px 11px #16524b; 
+    0 0 18px 11px #16524b;
 }
 
 .coin-market-data-card-2 {
     color: white;
-   
+    margin-top: 20px;
     grid-row: 2/3;
     height: 90px;
     width: 350px;
@@ -135,7 +135,7 @@
 
 .coin-market-data-card-3 {
     color: white;
- 
+    margin-top: 25px;
     grid-row: 3/4;
     height: 90px;
     width: 350px;

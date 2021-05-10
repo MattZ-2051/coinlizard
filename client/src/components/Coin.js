@@ -8,6 +8,7 @@ import {
   addFavorite,
   removeFavorite,
 } from "../actions/favoriteActions.js";
+import "../styles/coinHomePage.css";
 
 export default function Crypto({ coin, isFavorited }) {
   // Helper function to turn number into percent
@@ -49,7 +50,7 @@ export default function Crypto({ coin, isFavorited }) {
   };
 
   return (
-    <tr style={{ fontWeight: "bold" }} key={coin.id}>
+    <tr className="coin-root" style={{ fontWeight: "bold", borderColor: 'blue' }} key={coin.id}>
       <td>
         <img
           src={coin.image}

@@ -11,7 +11,7 @@ import {
   addFavorite,
   removeFavorite,
 } from "../actions/favoriteActions.js";
-
+import "../styles/homePage.css";
 // instance of CoinGecko client to use for api calls
 const coinGeckoClient = new CoinGecko();
 
@@ -54,12 +54,12 @@ function Home() {
       <table className="table">
         <thead>
           <tr>
-            <th>Symbol</th>
-            <th>24H Change</th>
-            <th>Price</th>
-            <th>Market cap</th>
+            <th className="header" style={{color: 'white'}}>Symbol</th>
+            <th className="header">24H Change</th>
+            <th className="header">Price</th>
+            <th className="header">Market cap</th>
             {user && (
-              <th>Favorited</th>
+              <th className="header">Favorited</th>
             )}
             
           </tr>
