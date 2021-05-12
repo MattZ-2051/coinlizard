@@ -8,7 +8,6 @@ import {
   addFavorite,
   removeFavorite,
 } from "../actions/favoriteActions.js";
-import "../styles/coinHomePage.css";
 
 export default function Crypto({ coin, isFavorited }) {
   // Helper function to turn number into percent

@@ -36,10 +36,10 @@ const UserProfile = () => {
                 </tr>
                 </thead>
                 <tbody>
-                   {favorites && (
+                   {/* {favorites && (
                         favorites.map((favorite) => (
                         <Favorite coin={favorite} key={favorite.coinName}/>
-                    )))} 
+                    )))}  */}
                 </tbody>
             </table>
             

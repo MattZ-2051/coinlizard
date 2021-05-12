@@ -44,7 +44,6 @@ const Favorite = (props) => {
         dispatch(removeFavorite(coin.id, form));
         window.location.reload(true);
       };
-    console.log('====', coin)
     return (     
         <tr style={{fontWeight: 'bold'}} key={coin.id}>
             {coin.market_data && (

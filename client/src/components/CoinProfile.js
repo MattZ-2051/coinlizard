@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
 import { fetchUser } from '../actions/userActions.js';
 import { addFavorite, getFavorites, removeFavorite } from "../actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
 import { ResponsiveContainer, AreaChart, XAxis, YAxis, Area, Tooltip, CartesianGrid } from 'recharts';
+
+import axios from "axios";
 import CoinGecko from "coingecko-api";
 import unfavorite from "../images/unfavorite.png";
 import favorite from "../images/favorite.png";
@@ -14,10 +16,9 @@ import SidebarFavorite from './SidebarFavorite';
 import "../styles/CoinProfile.css";
 import home from '../images/home.png';
 import Header from "./Header.js";
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
+import Sidebar from './Sidebar'
 const points = [];
+
 const coinGeckoClient = new CoinGecko();
 
 export default function CoinProfile() {
@@ -27,15 +28,15 @@ export default function CoinProfile() {
   const [favorited, setFavorited] = useState(false);
   const params = useParams();
   const dispatch = useDispatch();
+  const history = useHistory()
   const data = useSelector((state) => state.coinReducer);
   const user = useSelector((state) => state.authReducer);
   const prices = useSelector((state) => state.coinReducer.prices);
   const favorites = useSelector(state => state.favoriteReducer);
 
-  function getGraphData(array) {
 
-    for (let i = 0; i < array.length; i++) {
-      
+  function getGraphData(array) {
+    for (let i = 0; i < array.length; i++) {  
       if (i % 24 === 0) {
         const date = new Date(array[i][0]);
         points.push({
@@ -124,6 +125,10 @@ export default function CoinProfile() {
     }
   };
 
+  const handleClick = async (e) => {
+    history.push(`/accounts/${user._id}`);
+  };
+
   if (Object.keys(data).length === 0) return null;
 
   return (
@@ -152,7 +157,7 @@ export default function CoinProfile() {
               <>
                 {user && (
                   <>
-                    <img style={{ width: '100px', height: '100px', borderRadius: '50%', }} src={user.profilePhoto} />
+                    <img onClick={handleClick} style={{ width: '100px', height: '100px', borderRadius: '50%', }} src={user.profilePhoto} />
                   </>
                 )}
               </>
@@ -177,6 +182,7 @@ export default function CoinProfile() {
         
         
       </div>
+      {/* <Sidebar /> */}
       <div className='coin-profile-main'>
         <div className='row-1'>  
           <div className='coin-hourly-change-card'>
@@ -217,13 +223,7 @@ export default function CoinProfile() {
             </div>
             )}
         </div>   
-        <div className='row-2'>
-          {/* <div className='coin-desc-card'>
-            {data.description && (
-              <text dangerouslySetInnerHTML={{ __html: data.description.en }}></text>
-            )}
-          </div> */}
-         
+        <div className='row-2'>         
           <div className='coin-graph-card'>
             <h1 style={{display: 'flex', justifyContent:'center', color: 'white'}}>Weekly Trend</h1>
             <ResponsiveContainer>
