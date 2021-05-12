@@ -38,6 +38,7 @@ const Search = () => {
         // the item selected
         history.push(`/coin-profile/${item.id}`);
         window.location.reload(false);
+        window.location.reload(false);
     }
     
     return (

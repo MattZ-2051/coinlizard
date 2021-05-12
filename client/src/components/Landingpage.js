@@ -53,24 +53,16 @@ const Landingpage = () => {
                 />
             </div>
             <div className='landing-col-2'>
-                <div className="landing-button-coin">
-                    <img style={{ height: '50px' }} src={coin} />
-                </div>
                 <div className='landing-button-1'>
                     <button className='btn' onClick={toHome}>
                         Enter site
                     </button>
-                </div>
-
-                <div className="landing-button-google">
-                    <img style={{ height: '50px' }} src={google} />
                 </div>
                 <div className='landing-button-2'>
                     <a className='btn' href='/auth/google'>
                         Login with Google
                     </a>
                 </div>
-
             </div>
             <div className='landing-col-3'>
                 <div className='image-div'>

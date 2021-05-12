@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from '../actions/userActions.js';
 import { useParams, useHistory } from "react-router-dom";
 import { fetchData, fetchTwoWeekData } from "../actions/coinActions";
+import LoggedInSidebar from './LoggedInSidebar';
+import LoggedOutSidebar from './LoggedOutSidebar';
 import CoinGecko from "coingecko-api";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -84,37 +86,13 @@ function Home() {
 
   console.log('favorites', favorites)
   return (
-    <>
-      <div className='home-root'>
-        <div className='home-col-1'>
-          <div className='home-profile-photo'>
-            <>
-              {user && (
-                  <img style={{ width: '100px', height: '100px', borderRadius: '50%', }} src={user.profilePhoto} />
-              )}
-            </>
-          </div>
-          <div className='home-search'>
-            <Search />
-          </div>
-              {user ? (
-                  <div className='home-user-favorites'>
-                    {coinData ? (
-                      coinData.map((coin) => {
-                        return (
-                          <SidebarFavorite
-                            coin={coin}
-                            key={coin.id}
-                            isFavorited={test(favorites, coin)}
-                          />
-                        )
-                      })
-                    ) : (
-                      <h1>Loading...</h1>
-                    )}
-                    </div>
-              ) : (null)}
-        </div>
+    <div className='home-root'>
+      {user ? (
+        <LoggedInSidebar />
+      ) : (
+        <LoggedOutSidebar />
+      )}
+       
         <div className='home-col-2'>
           {coinData.map((coin) => (
             <div className='coin-stats'>
@@ -126,10 +104,14 @@ function Home() {
                   
                 </div>
                 <div className='coin-stats-price size'>
-                  <text>{coin.current_price}</text>
+                <text style={{ color: '#05E502'}}>{`$${coin.current_price}`}</text>
                 </div>  
                 <div className='coin-stats-24h-change size'>
-                  <text>{coin.market_cap_change_percentage_24h}</text>
+                  {coin.market_cap_change_percentage_24h > 0 ? (
+                    <text style={{ color: '#05E502' }}>+{coin.market_cap_change_percentage_24h}</text>
+                  ) : (
+                    <text style={{ color: 'red' }}>{coin.market_cap_change_percentage_24h}</text>
+                  )}
                 </div>
                 <div className='coin-stats-market-cap size'>
                   <text>{coin.market_cap}</text>
@@ -174,12 +156,7 @@ function Home() {
         <div className='home-col-3'>
       
         </div>
-        
-      </div>
-      <div className='footer'>
-          
-      </div>
-    </>
+    </div>
   );
 }
 

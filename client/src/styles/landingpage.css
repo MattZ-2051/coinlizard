@@ -10,41 +10,31 @@
 .landing-col-2 {
     grid-column: 2/3;
     grid-row: 2/3;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-}
-
-.landing-button-coin {
-    grid-column: 1/2;
-    grid-row: 1/2;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-
-.landing-button-google {
-    grid-column: 2/3;
-    grid-row: 1/2;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .landing-button-1 {
-    grid-column: 1/2;
-    grid-row: 2/3;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #2258af;
+    box-shadow: 0 0 8px 3.5px #2258af,  
+    0 0 12px 7px #163464,
+    0 0 18px 11px #0a182e; 
 }
 
 .landing-button-2 {
-    grid-column: 2/3;
-    grid-row: 2/3;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 50px;
+    width: 150px;
+    background-color: #DF2935;
+    box-shadow: 0 0 8px 3.5px #DF2935,  
+    0 0 12px 7px #a11e26,
+    0 0 18px 11px #661319; 
 }
 
 .landing-col-3 {
