@@ -10,10 +10,6 @@ import '../styles/sidebar-favorite.css';
 const coinGeckoClient = new CoinGecko();
 
 const SidebarFavorite = ({ coin, isFavorited }) => {
-    const [coinData, setCoinData] = useState([]);
-    const user = useSelector((state) => state.authReducer);
-    const favorites = useSelector((state) => state.favoriteReducer);
-    const dispatch = useDispatch();
 
     return (
 
