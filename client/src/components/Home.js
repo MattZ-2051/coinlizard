@@ -56,9 +56,10 @@ function Home() {
     // isFavorites(favorites, params.coinId);
 
     dispatch(fetchUser())
+    
     dispatch(getFavorites(user._id));
     fetchData();
-  }, [fetchData, fetchTwoWeekData]);
+  }, [getFavorites]);
 
   const isFavorited = (array, coin) => {
    
@@ -71,20 +72,27 @@ function Home() {
     return <img src={unfavorite} />;
   };
 
-  const test = (array, coin) => {
-   
+  const handleAddOrRemoveFavorites = (array, coin) => {
+  
+    const form = {
+      coinName: coin.id,
+      _user: user._id,
+    };
+
     for (let i = 0; i < array.length; i++) {
       let obj = array[i];
-      console.log('im hereeeee', coin)
       if (obj[Object.keys(obj)[1]] === coin.id) {
-        return true
+        console.log(coin.id, ' has been removed')
+        dispatch(removeFavorite(coin.id, form));
+       // window.location.reload(true);
+        return
       }
     }
-    return false
-  };
+    dispatch(addFavorite(form));
+    //window.location.reload(true);
+    console.log(coin.id, ' has been added')
+  }
 
-
-  console.log('favorites', favorites)
   return (
     <div className='home-root'>
       {user ? (
@@ -94,6 +102,14 @@ function Home() {
       )}
        
         <div className='home-col-2'>
+          <div className='home-headers'>
+            <h3 className="header">Name</h3>
+            <h3 className="header">Price</h3>
+            <h3 className="header">24h Change</h3>
+            <h3 className="header">Market Cap</h3>
+            <h3 className="header">Favorited</h3>
+          </div>
+          
           {coinData.map((coin) => (
             <div className='coin-stats'>
     
@@ -122,7 +138,7 @@ function Home() {
                   ) : (
                     <img src={unfavorite} />
                   ))}  */}
-                  <h1>{isFavorited(favorites, coin.id)}</h1>
+                  <h1 onClick={() => handleAddOrRemoveFavorites(favorites, coin)}>{isFavorited(favorites, coin.id)}</h1>
                 </div>
             </div>
           ))}

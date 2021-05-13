@@ -57,7 +57,6 @@ function LoggedInSidebar() {
 
         for (let i = 0; i < array.length; i++) {
             let obj = array[i];
-            console.log('im hereeeee', coin)
             if (obj[Object.keys(obj)[1]] === coin.id) {
                 return true
             }
@@ -80,6 +79,9 @@ function LoggedInSidebar() {
             </div>
             <div className='home-search'>
                 <Search />
+            </div>
+            <div className='home-sidebar-header'>
+                <h3 className='favorites-header'>Favorites</h3>
             </div>
             {user ? (
                 <div className='home-user-favorites'>
