@@ -66,18 +66,6 @@ export default function CoinProfile() {
     if (prices) {
       getGraphData(prices);
     }
-
-    async function isFavorites(array, coin) {
-      for (let i = 0; i < array.length; i++) {
-        let obj = array[i];  
-        if (obj[Object.keys(obj)[1]] === coin) {
-          setFavorited(true)
-          return
-        }
-      }
-      setFavorited(false);
-    }
-    isFavorites(favorites, params.coinId);
   }, [prices]);
   
   const isFavorited = (array, coin) => {
@@ -90,36 +78,16 @@ export default function CoinProfile() {
     return false;
   };
 
-  // const handleClick = (e) => {
-  //   if (e.target.id === "dev-data") {
-  //     setShowDevData(!showDevData);
-  //   } else if (e.target.id === "comm-data") {
-  //     setShowCommData(!showCommData);
-  //   }
-  // };
-
-  // const addToFavorites = (e) => {
-  //   e.preventDefault();
-
-  //   const form = {
-  //     coinName: data.id,
-  //     _user: user._id,
-  //   };
-  //   dispatch(addFavorite(form));
-  // };
-
-  const handleFavorites = (e) => {
+  const handleAddOrRemoveFavorites = (e) => {
     const form = {
       coinName: data.id,
       _user: user._id,
     };
 
-    if (favorited === false) {
-      console.log('favorited')
+    if (isFavorited(favorites, data) === false) {
       dispatch(addFavorite(form));
       window.location.reload(false);
     } else {
-      console.log('unfavorited')
       dispatch(removeFavorite(data.id, form));
       window.location.reload(false);
     }
@@ -141,11 +109,14 @@ export default function CoinProfile() {
               </text>
         </div>
         <div className='home-and-favorited'>
-          <img src={home} />
-          {favorited ? (
-            <img onClick={handleFavorites} src={favorite} />
+          <a href='/home'>
+            <img src={home} />
+          </a>
+          
+          {isFavorited(favorites, data) ? (
+            <img style={{ height: 50 }} onClick={handleAddOrRemoveFavorites} src={favorite} />
           ) : (
-              <img onClick={handleFavorites} src={unfavorite} />
+              <img style={{ height: 50 }} onClick={handleAddOrRemoveFavorites} src={unfavorite} />
           )}
         </div>
         <div className='sidebar-search'>

@@ -4,9 +4,7 @@ import axios from "axios";
 export const addFavorite = (form) => async(dispatch) => {
 
     const res = await axios.post('/api/favorites', form);
-    if (res.status === 200) {
-        dispatch({ type: favoriteConstant.FETCH_FAVORITE_DATA, payload: res.data });
-    }
+    
 }
 
 export const removeFavorite = (coinId, form) => async(dispatch) => {
