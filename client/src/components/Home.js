@@ -8,7 +8,7 @@ import LoggedOutSidebar from './LoggedOutSidebar';
 import CoinGecko from "coingecko-api";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Coin from "./Coin";
+import Crypto from "./Coin";
 import Header from "./Header";
 import Loading from "../components/Loading";
 import unfavorite from "../images/unfavorite.png";
@@ -42,56 +42,20 @@ function Home() {
       const result = await coinGeckoClient.coins.markets({ params });
       setCoinData(result.data);
     }
-
-    // async function isFavorites(array, coin) {
-    //   for (let i = 0; i < array.length; i++) {
-    //     let obj = array[i];
-    //     if (obj[Object.keys(obj)[1]] === coin) {
-    //       setFavorited(true)
-    //       return
-    //     }
-    //   }
-    //   setFavorited(false);
-    // }
-    // isFavorites(favorites, params.coinId);
-
     dispatch(fetchUser())
-    
     dispatch(getFavorites(user._id));
     fetchData();
   }, [getFavorites]);
 
-  const isFavorited = (array, coin) => {
-   
-    for (let i = 0; i < array.length; i++) {
-      let obj = array[i];
-      if (obj[Object.keys(obj)[1]] === coin) {
-        return <img src={favorite} />;
-      }
-    }
-    return <img src={unfavorite} />;
-  };
-
-  const handleAddOrRemoveFavorites = (array, coin) => {
-  
-    const form = {
-      coinName: coin.id,
-      _user: user._id,
-    };
-
+  const isFavorited = (array, coin) => { // function for determining whether a user has favorited a crypto
     for (let i = 0; i < array.length; i++) {
       let obj = array[i];
       if (obj[Object.keys(obj)[1]] === coin.id) {
-        console.log(coin.id, ' has been removed')
-        dispatch(removeFavorite(coin.id, form));
-       // window.location.reload(true);
-        return
+        return true
       }
     }
-    dispatch(addFavorite(form));
-    //window.location.reload(true);
-    console.log(coin.id, ' has been added')
-  }
+    return false
+  };
 
   return (
     <div className='home-root'>
@@ -107,67 +71,22 @@ function Home() {
             <h3 className="header">Price</h3>
             <h3 className="header">24h Change</h3>
             <h3 className="header">Market Cap</h3>
-            <h3 className="header">Favorited</h3>
+            {user ? (
+              <h3 className="header">Favorited</h3>
+            ) : (
+              <h3 className="header">Favorited</h3>
+            )}
+            
           </div>
           
           {coinData.map((coin) => (
-            <div className='coin-stats'>
-    
-                <div className='coin-stats-id size'>
-                <a href={`/coin-profile/${coin.id}`}>
-                    <text>{coin.id}</text>
-                </a>
-                  
-                </div>
-                <div className='coin-stats-price size'>
-                <text style={{ color: '#05E502'}}>{`$${coin.current_price}`}</text>
-                </div>  
-                <div className='coin-stats-24h-change size'>
-                  {coin.market_cap_change_percentage_24h > 0 ? (
-                    <text style={{ color: '#05E502' }}>+{coin.market_cap_change_percentage_24h}</text>
-                  ) : (
-                    <text style={{ color: 'red' }}>{coin.market_cap_change_percentage_24h}</text>
-                  )}
-                </div>
-                <div className='coin-stats-market-cap size'>
-                  <text>{coin.market_cap}</text>
-                </div>
-                <div className='favorited'>
-                  {/* {isFavorited((favorites, coin.id) ? (
-                    <img src={favorite} />
-                  ) : (
-                    <img src={unfavorite} />
-                  ))}  */}
-                  <h1 onClick={() => handleAddOrRemoveFavorites(favorites, coin)}>{isFavorited(favorites, coin.id)}</h1>
-                </div>
-            </div>
+            <Crypto  
+              coin={coin}
+              key={coin.id}
+              isFavorited={isFavorited(favorites, coin)}
+            />
           ))}
           
-          {/* 
-          <div className='home-col-2-24h-change'>
-            {coinData.map((coin) => (
-              <h1>{coin.market_cap_change_percentage_24h}</h1>
-            ))}
-          </div>
-          <div className='home-col-2-price'>
-            {coinData.map((coin) => (
-              <h1>{coin.current_price}</h1>
-            ))}
-          </div>
-          <div className='home-col-2-market-cap'>
-            {coinData.map((coin) => (
-              <h1>{coin.market_cap}</h1>
-            ))}
-          </div>
-          <div className='home-col-2-favorited'>
-            {coinData.map((coin) => (
-              isFavorited(favorites, coin.id) ? (
-                <img src={favorite} />
-              ) : (
-                <img src={unfavorite} />
-              )
-            ))}
-          </div> */}
         </div>
         <div className='home-col-3'>
       

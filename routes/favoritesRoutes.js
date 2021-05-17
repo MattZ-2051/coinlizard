@@ -30,7 +30,9 @@ module.exports = app => {
         });
         res.send('Deleted')
     })
+
     app.get('/api/favorites/:_user', (req ,res) => {
+        
         Favorite.find({ _user: req.user._id }).then(function(favorite) {
             res.send(favorite)
         });

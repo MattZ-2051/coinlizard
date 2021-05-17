@@ -10,6 +10,7 @@ import {
 } from "../actions/favoriteActions.js";
 
 export default function Crypto({ coin, isFavorited }) {
+  
   // Helper function to turn number into percent
   const formatPercent = (number) => `${new Number(number).toFixed(2)}%`;
 
@@ -22,20 +23,14 @@ export default function Crypto({ coin, isFavorited }) {
     }).format(number);
 
   const user = useSelector((state) => state.authReducer);
-  const favorites = useSelector((state) => state.favoriteReducer);
-  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user) {
-      dispatch(getFavorites(user._id));
-    } else {
-      return
-    }
-    
+     dispatch(getFavorites(user._id));
   }, [dispatch]);
 
   const handleFavorites = (e) => {
+    console.log('hasdfhasdjf')
     const form = {
       coinName: coin.id,
       _user: user._id,
@@ -49,50 +44,44 @@ export default function Crypto({ coin, isFavorited }) {
   };
 
   return (
-    <>
-    {isFavorited ? (
-      <img style={{ height: 30, paddingLeft: 35 }} src={favorite} />
-    ) : (
-      <img style={{ height: 30, paddingLeft: 35 }} src={unfavorite} />
-    )}  
-    </>
-    )
-    // <tr className="coin-root" style={{ fontWeight: "bold", borderColor: 'blue' }} key={coin.id}>
-    // <td>
-    // <img
-    //       src={coin.image}
-    //       style={{ width: 25, height: 25, marginRight: 10 }}
-    //     />
-    //     <Link to={`/coin-profile/${coin.id}`} style={{ color: "#000000" }}>
-    //       {coin.symbol.toUpperCase()}
-    //     </Link>
-    //   </td>
-    //   <td style={{ fontWeight: "bold" }}>
-    //     <span
-    //       className={
-    //         coin.price_change_percentage_24h > 0
-    //           ? "text-success"
-    //           : "text-danger"
-    //       }
-    //     >
-    //       {formatPercent(coin.price_change_percentage_24h)}
-    //     </span>
-    //   </td>
-    //   <td style={{ fontWeight: "bold" }}>
-    //     {formatDollar(coin.current_price, 20)}
-    //   </td>
-    //   <td style={{ fontWeight: "bold" }}>
-    //     {formatDollar(coin.market_cap, 12)}
-    //   </td>
-    //   {user && (
-    //     <td onClick={handleFavorites}>
-    //       {isFavorited ? (
-    //         <img style={{ height: 30, paddingLeft: 35 }} src={favorite} />
-    //       ) : (
-    //         <img style={{ height: 30, paddingLeft: 35 }} src={unfavorite} />
-    //       )}  
-    //     </td>
-    //   )}
-      
-    // </tr>
+    <div className='coin-stats'>
+      <div className='coin-stats-id size'>
+      <a href={`/coin-profile/${coin.id}`}>
+          <text>{coin.id}</text>
+      </a>
+
+      </div>
+      <div className='coin-stats-price size'>
+      <text style={{ color: '#05E502'}}>{`$${coin.current_price}`}</text>
+      </div>  
+      <div className='coin-stats-24h-change size'>
+        {coin.market_cap_change_percentage_24h > 0 ? (
+          <text style={{ color: '#05E502' }}>+{coin.market_cap_change_percentage_24h}%</text>
+        ) : (
+          <text style={{ color: 'red' }}>{coin.market_cap_change_percentage_24h}%</text>
+        )}
+      </div>
+      <div className='coin-stats-market-cap size'>
+        <text>{coin.market_cap}</text>
+      </div>
+      <div className='favorited'>
+         {user && user ? (
+         <div onClick={handleFavorites}>
+           {isFavorited ? (
+             <img style={{ height: 40, paddingLeft: 35 }} src={favorite} />
+           ) : (
+              <img style={{ height: 40, paddingLeft: 35 }} src={unfavorite} />
+            )}     
+          </div >
+         ) : (
+            <a href='/auth/google'>
+             <img style={{ height: 30, paddingLeft: 35 }} src={unfavorite} />
+           </a>
+            
+         )
+         }
+      </div>
+  </div>
+  )
 }
+

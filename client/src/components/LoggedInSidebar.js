@@ -21,7 +21,6 @@ const coinGeckoClient = new CoinGecko();
 
 function LoggedInSidebar() {
     const [coinData, setCoinData] = useState([]);
-    const [favorited, setFavorited] = useState(false);
     const user = useSelector((state) => state.authReducer);
     const favorites = useSelector((state) => state.favoriteReducer);
     const dispatch = useDispatch();
@@ -46,17 +45,6 @@ function LoggedInSidebar() {
 
         for (let i = 0; i < array.length; i++) {
             let obj = array[i];
-            if (obj[Object.keys(obj)[1]] === coin) {
-                return <img src={favorite} />;
-            }
-        }
-        return <img src={unfavorite} />;
-    };
-
-    const test = (array, coin) => {
-
-        for (let i = 0; i < array.length; i++) {
-            let obj = array[i];
             if (obj[Object.keys(obj)[1]] === coin.id) {
                 return true
             }
@@ -64,8 +52,6 @@ function LoggedInSidebar() {
         return false
     };
 
-
-    console.log('favorites', favorites)
     return ( 
         <div className='home-col-1'>
             <div className='home-profile-photo'>
@@ -91,7 +77,7 @@ function LoggedInSidebar() {
                                 <SidebarFavorite
                                     coin={coin}
                                     key={coin.id}
-                                    isFavorited={test(favorites, coin)}
+                                    isFavorited={isFavorited(favorites, coin)}
                                 />
                             )
                         })
