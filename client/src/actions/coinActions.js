@@ -20,14 +20,6 @@ export const fetchTwoWeekData = (id) => async (dispatch) => {
   }
 }
 
-// export const getEthereumData = () => async (dispatch) => {
-//   const res = await axios.get(`https://api.coingecko.com/api/v3/coins/ethereum`)
-//   console.log(res);
-//   if (res.status === 200) {
-//     dispatch({ type: coinConstant.FETCH_COIN_DATA, payload: res.data.prices })
-//   }
-// }
-
 export const getBitcoinData = () => async (dispatch) => {
   const res = await axios.get(`https://api.coingecko.com/api/v3/coins/bitcoin`)
   console.log(res);
