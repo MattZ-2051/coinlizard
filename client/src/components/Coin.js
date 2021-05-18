@@ -42,11 +42,12 @@ export default function Crypto({ coin, isFavorited }) {
       dispatch(removeFavorite(coin.id, form));
     }
   };
-
+  // console.log(coin)
   return (
     <div className='coin-stats'>
       <div className='coin-stats-id size'>
       <a href={`/coin-profile/${coin.id}`}>
+          <img src={coin.image} style={{ width: 35, height: 35, marginRight: '10px' }} />
           <text>{coin.id}</text>
       </a>
 

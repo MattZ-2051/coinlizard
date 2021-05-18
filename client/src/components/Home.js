@@ -56,7 +56,7 @@ function Home() {
     }
     return false
   };
-
+  console.log(coinData)
   return (
     <div className='home-root'>
       {user ? (
